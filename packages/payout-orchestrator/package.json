@@ -1,0 +1,21 @@
+{
+  "name": "@agent-payroll/payout-orchestrator",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Turns pay obligations into AllScale claim-link auto-payouts. Idempotent, crash-safe, three independent state chains.",
+  "scripts": {
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "cli": "node --import tsx src/cli.ts",
+    "set-key": "node --import tsx src/setkey.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}

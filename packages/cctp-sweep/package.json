@@ -1,0 +1,26 @@
+{
+  "name": "@agent-payroll/cctp-sweep",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Sweep the agent's Solana USDC into the operator's EVM wallet via Circle CCTP V2 (burn on Solana \u2192 attestation \u2192 mint on EVM).",
+  "scripts": {
+    "sweep": "node --import tsx src/sweep.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/web3.js": "^1.95.3",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "viem": "^2.21.0",
+    "@agent-payroll/payout-orchestrator": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}

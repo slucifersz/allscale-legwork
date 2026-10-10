@@ -1,0 +1,25 @@
+{
+  "name": "agent-payroll",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Agent Payroll \u2014 an AI agent earns USDC on Solana and pays humans through AllScale claim links. Built for Colosseum Crypto World's Fair 2026.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "setup-devnet": "node --import tsx scripts/setup-devnet.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.1"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.3",
+    "@solana/spl-token": "^0.4.8",
+    "bs58": "^6.0.0"
+  }
+}

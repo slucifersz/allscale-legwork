@@ -1,0 +1,30 @@
+{
+  "name": "@agent-payroll/x402-server",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "The agent's paid endpoint on Solana: HTTP 402 \u2192 client pays USDC \u2192 job + tasks created in the orchestrator.",
+  "scripts": {
+    "dev": "node --import tsx src/server.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "client": "node --import tsx src/client.ts"
+  },
+  "dependencies": {
+    "@agent-payroll/payout-orchestrator": "*",
+    "@solana/web3.js": "^1.95.3",
+    "@x402/core": "latest",
+    "@x402/express": "latest",
+    "@x402/svm": "latest",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "@solana/spl-token": "^0.4.8",
+    "bs58": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
