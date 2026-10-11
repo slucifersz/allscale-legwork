@@ -26,6 +26,16 @@ export class Orchestrator {
 
   // ---------- jobs & tasks ----------
 
+  /** Replace the job's payment reference once the on-chain settlement signature is known (x402 settles after the handler). */
+  setJobClientRef(jobId: string, clientRef: string) {
+    return this.o.store.update((l) => {
+      const j = l.jobs[jobId];
+      if (!j) throw new Error("unknown job");
+      j.clientRef = clientRef;
+      return clone(j);
+    });
+  }
+
   createJob(clientRef: string, revenueAmount: string) {
     return this.o.store.update((l) => {
       const id = "job_" + this.idGen();

@@ -8,11 +8,13 @@
     "dev": "node --import tsx src/server.ts",
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "client": "node --import tsx src/client.ts"
+    "client": "node --import tsx src/client.ts",
+    "client:x402": "node --import tsx src/x402-client.ts"
   },
   "dependencies": {
     "@agent-payroll/payout-orchestrator": "*",
     "@solana/web3.js": "^1.95.3",
+    "@solana/kit": "^5.5.1",
     "@x402/core": "latest",
     "@x402/express": "latest",
     "@x402/svm": "latest",

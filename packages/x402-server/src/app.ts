@@ -27,6 +27,10 @@ export const toAtomic = (usdc: string) => {
   return (BigInt(i) * 1_000_000n + BigInt((f + "000000").slice(0, 6))).toString();
 };
 
+/** Stable key for a signed x402 payload before settlement: the signed transaction/signature string, truncated. */
+const payloadRef = (p: { payload?: Record<string, unknown> } | undefined) =>
+  String(p?.payload?.transaction ?? p?.payload?.signature ?? "").slice(0, 120) || "x402:" + Date.now();
+
 export async function buildApp(o: AppOptions): Promise<express.Express> {
   const app = express();
   app.use(express.json());
@@ -38,6 +42,18 @@ export async function buildApp(o: AppOptions): Promise<express.Express> {
     if (!o.facilitatorUrl) throw new Error("facilitatorUrl required");
     const facilitator = new HTTPFacilitatorClient({ url: o.facilitatorUrl });
     const resourceServer = new x402ResourceServer(facilitator).register(o.network, new ExactSvmScheme());
+    // The middleware settles AFTER our handler, so the job is first recorded with the signed-payload reference and then
+    // updated with the real on-chain signature from the facilitator's settle response.
+    const pendingJobs = new Map<string, string>(); // payload reference → jobId
+    resourceServer.onAfterSettle(async (ctx) => {
+      const key = payloadRef(ctx.paymentPayload as { payload?: Record<string, unknown> });
+      const jobId = pendingJobs.get(key);
+      const tx = (ctx.result as { transaction?: string }).transaction;
+      if (jobId && tx) {
+        o.orch.setJobClientRef(jobId, tx);
+        pendingJobs.delete(key);
+      }
+    });
     app.use(
       paymentMiddleware(
         {
@@ -57,12 +73,12 @@ export async function buildApp(o: AppOptions): Promise<express.Express> {
         const sigHeader = req.header("PAYMENT-SIGNATURE") ?? req.header("X-PAYMENT") ?? "";
         let ref = "x402:" + Date.now();
         try {
-          const p = JSON.parse(Buffer.from(sigHeader, "base64").toString("utf8"));
-          ref = String(p?.payload?.transaction ?? p?.payload?.signature ?? ref).slice(0, 120);
+          ref = payloadRef(JSON.parse(Buffer.from(sigHeader, "base64").toString("utf8")));
         } catch {
           /* keep fallback */
         }
         const out = await createPaidJob(o.orch, o.planner, { request: String(req.body?.request ?? ""), paymentRef: ref, amountUsdc: o.priceUsdc });
+        pendingJobs.set(ref, out.job.id);
         res.json(out);
       } catch (e) {
         res.status(500).json({ error: String(e) });

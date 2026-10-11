@@ -35,7 +35,7 @@ app.get("/", (_req, res) => {
       return `<div class="card">
 ${moneyTrail(job, tasks, obs)}
 <div><b>Job ${esc(job.id)}</b> · revenue ${esc(job.revenueAmount)} USDC on Solana · <a href="${solLink(job.clientRef)}" target="_blank" rel="noopener"><code>${esc(short(job.clientRef))}</code></a> · ${esc(job.createdAt.slice(0, 16))}Z</div>
-<div class="sub">${tasks.length} task(s) · ${obs.length} obligation(s) · ${paid} USDC paid into claim links</div>
+<div class="sub">${tasks.length} task(s) · ${obs.length} obligation(s) · ${paid} ${obs[0] ? coin(obs[0]) : "USDT"} paid into claim links</div>
 <table><tr><th>task</th><th>state</th><th>obligation</th><th>payment</th><th>funding tx</th><th>claim</th></tr>
 ${tasks.map((t) => obRows(t, obs.filter((o) => o.taskId === t.id))).join("")}
 </table></div>`;
@@ -44,7 +44,7 @@ ${tasks.map((t) => obRows(t, obs.filter((o) => o.taskId === t.id))).join("")}
   res.send(
     page(
       "Agent Payroll — settlement record",
-      `<h1>Settlement record</h1><p class="sub">Every USDC the agent received on Solana, and every claim link it funded on AllScale for a human. Test networks. Emails and claim URLs are private.</p>${rows || "<p>No jobs yet.</p>"}`,
+      `<h1>Settlement record</h1><p class="sub">Every USDC the agent received on Solana, and every stablecoin claim link it funded on AllScale for a human. Test networks. Emails and claim URLs are private.</p>${rows || "<p>No jobs yet.</p>"}`,
     ),
   );
 });
@@ -61,7 +61,7 @@ function moneyTrail(job: Job, tasks: Task[], obs: Obligation[]): string {
 ${step("done", "1 · client paid on Solana", `${esc(job.revenueAmount)} USDC`, link(solLink(job.clientRef), short(job.clientRef)))}
 ${step(sw ? (sw.state === "minted" ? "done" : "wait") : "wait", "2 · CCTP burn (Solana)", sw ? "burned" : "not started", sw ? link(solLink(sw.solanaBurnTx), short(sw.solanaBurnTx)) : "revenue still on Solana")}
 ${step(sw?.state === "minted" ? "done" : "wait", "3 · USDC minted to operator (EVM)", sw?.state === "minted" ? `${Number(sw.mintedAtomic ?? 0) / 1e6} USDC` : sw?.state === "attested" ? "attested, minting…" : "waiting for attestation", sw?.evmReceiveTx ? link(evmLink(sw.evmReceiveTx), short(sw.evmReceiveTx)) : "")}
-${step(funded.length === tasks.length && tasks.length > 0 ? "done" : funded.length ? "wait" : "wait", "4 · claim links funded (AllScale)", `${funded.length} / ${tasks.length} · ${funded.reduce((a, o) => a + Number(o.amount), 0)} USDC`, funded.map((o) => link(evmLink(o.payment.fundingTxHash), short(o.payment.fundingTxHash, 6))).join(" "))}
+${step(funded.length === tasks.length && tasks.length > 0 ? "done" : funded.length ? "wait" : "wait", "4 · claim links funded (AllScale)", `${funded.length} / ${tasks.length} · ${funded.reduce((a, o) => a + Number(o.amount), 0)} ${funded[0] ? coin(funded[0]) : "USDT"}`, funded.map((o) => link(evmLink(o.payment.fundingTxHash), short(o.payment.fundingTxHash, 6))).join(" "))}
 ${step(claimed.length === funded.length && funded.length > 0 ? "done" : refunded.length ? "bad" : "wait", "5 · claimed by humans", `${claimed.length} claimed${refunded.length ? ` · ${refunded.length} refunded (re-issued)` : ""}`, claimed.map((o) => (o.claim.claimTxHash ? link(evmLink(o.claim.claimTxHash), short(o.claim.claimTxHash, 6)) : "")).join(" "))}
 </div>`;
 }
@@ -71,7 +71,7 @@ function obRows(t: Task, obs: Obligation[]): string {
   return obs
     .map(
       (o) => `<tr><td>${esc(t.id)}<br><span class="sub">${esc(t.title)}</span></td><td>${tag(t.state)}</td>
-<td><code>${esc(o.id)}</code>${o.supersedes ? `<br><span class="sub">re-issue of ${esc(o.supersedes)}</span>` : ""}<br>${esc(o.amount)} USDC</td>
+<td><code>${esc(o.id)}</code>${o.supersedes ? `<br><span class="sub">re-issue of ${esc(o.supersedes)}</span>` : ""}<br>${esc(o.amount)} ${coin(o)}</td>
 <td>${tag(o.payment.state, o.payment.state === "funded" ? "ok" : o.payment.state === "failed_needs_operator" ? "bad" : "warn")}${o.payment.lastError ? `<br><span class="sub">${esc(o.payment.lastError.code ?? "")} ${esc(o.payment.lastError.reasonCode ?? "")}</span>` : ""}</td>
 <td>${o.payment.fundingTxHash ? `<a href="${evmLink(o.payment.fundingTxHash)}" target="_blank" rel="noopener"><code>${esc(short(o.payment.fundingTxHash))}</code></a>` : "—"}</td>
 <td>${tag(o.claim.state, o.claim.state === "claimed" ? "ok" : o.claim.state === "refunded" ? "bad" : "")}${o.claim.claimTxHash ? `<br><a href="${evmLink(o.claim.claimTxHash)}" target="_blank" rel="noopener"><code>${esc(short(o.claim.claimTxHash))}</code></a>` : ""}</td></tr>`,
@@ -103,7 +103,8 @@ ${paid.length ? `<h2>Your payments</h2>${paid.map(({ o, t }) => paidCard(o, t)).
   );
 });
 
-const paidCard = (o: Obligation, t?: Task) => `<div class="card" style="border-color:var(--ok)"><b>${esc(t?.title ?? o.taskId)}</b> · <b>${esc(o.amount)} ${o.stableCoin === 1 ? "USDT" : "USDC"}</b> · ${tag(o.claim.state === "claimed" ? "claimed" : "ready to claim", o.claim.state === "claimed" ? "ok" : "")}
+const coin = (o: { stableCoin?: number }) => (o.stableCoin === 1 ? "USDT" : "USDC");
+const paidCard = (o: Obligation, t?: Task) => `<div class="card" style="border-color:var(--ok)"><b>${esc(t?.title ?? o.taskId)}</b> · <b>${esc(o.amount)} ${coin(o)}</b> · ${tag(o.claim.state === "claimed" ? "claimed" : "ready to claim", o.claim.state === "claimed" ? "ok" : "")}
 <p class="sub">Accepted ${esc((o.payment.fundedAt ?? "").slice(0, 16))}Z · funding tx <a href="${evmLink(o.payment.fundingTxHash)}" target="_blank" rel="noopener"><code>${esc(short(o.payment.fundingTxHash))}</code></a></p>
 ${o.claim.state !== "claimed" && o.payment.claimUrl ? `<a href="${esc(o.payment.claimUrl)}" target="_blank" rel="noopener"><button>Claim your payment</button></a> <span class="sub">opens AllScale — enter a wallet address, or your email to create one</span>` : ""}</div>`;
 
@@ -162,7 +163,7 @@ ${submitted.map((t) => reviewCard(t, String(req.query.token))).join("") || "<p>N
 const reviewCard = (t: Task, token: string) => {
   const check = (t.submission?.evidence as any)?.check as { checks: { name: string; ok: boolean; detail: string }[] } | undefined;
   const file = (t.submission?.evidence as any)?.file as string | undefined;
-  return `<div class="card"><b>${esc(t.title)}</b> · ${esc(t.reward)} USDC · batch <code>${esc(t.batchId)}</code> · ${tag(t.state)}
+  return `<div class="card"><b>${esc(t.title)}</b> · ${esc(t.reward)} ${process.env.ALLSCALE_STABLE_COIN === "2" ? "USDC" : "USDT"} · batch <code>${esc(t.batchId)}</code> · ${tag(t.state)}
 <p class="sub">${esc(t.acceptanceCriteria)}</p>
 ${file ? `<img src="/uploads/${esc(file)}?token=${esc(token)}" style="max-width:100%;max-height:360px;border-radius:8px">` : ""}
 <p>${(check?.checks ?? []).map((c) => tag(`${c.name}: ${c.detail}`, c.ok ? "ok" : "warn")).join(" ")}</p>

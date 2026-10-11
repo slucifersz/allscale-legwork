@@ -8,7 +8,7 @@ All commands from the repo root unless noted. Node ≥ 20. `npm install` once.
 | --- | --- | --- |
 | AllScale **Store API key + secret** with scope `claim_link:auto_payout` | `packages/payout-orchestrator/.env` and `packages/web/.env` | gamma Dashboard → non-test store → Store Settings → Payout → Enable API-Auto-Payout → signing session + limits → copy credentials |
 | AllScale gamma base URL | `ALLSCALE_BASE_URL` | **`https://openapi-sandbox.allscale.io`** (verified 10 Oct). Not `openapi-beta` (separate DB → invalid_key), not `gamma.allscale.io/api` (Main API → 2012). |
-| Operator Turnkey EOA address (payout source) | `packages/cctp-sweep/.env` `DEST_RECIPIENT` | Dashboard wallet page; fund it with Sepolia USDC first |
+| Operator Turnkey EOA address (payout source) | `packages/cctp-sweep/.env` `DEST_RECIPIENT` | Dashboard wallet page; the token it pays is whatever it holds (gamma: USDT) |
 | Agent Solana devnet wallet (base58 secret) | `packages/cctp-sweep/.env`, `SOLANA_PAY_TO` (its pubkey) in `packages/x402-server/.env` | `solana-keygen new`; airdrop SOL; get devnet USDC from faucet.circle.com; create its USDC ATA |
 | Sepolia relayer key (gas only) | `EVM_RELAYER_PRIVATE_KEY` | any throwaway key with Sepolia ETH |
 | x402 facilitator URL supporting `solana:EtWT…` | `FACILITATOR_URL` | solana.com/docs/tools/x402-facilitator → pick one; or set `X402_MODE=selfverify` |
@@ -68,7 +68,15 @@ cd packages/web && cp .env.example .env && npm run dev
 cd packages/payout-orchestrator && node --import tsx src/webhook.ts
 ```
 
-Client call (selfverify mode): pay USDC on devnet to `SOLANA_PAY_TO`, then
+Client call (facilitator mode, the real protocol — use this for the demo):
+
+```
+cd packages/x402-server
+npm run client:x402 -- "天河区 A店, B店, C店 — open today?"
+```
+Prints the 402, the signed payment, then 200 + PAYMENT-RESPONSE with the settled Solana tx.
+
+Client call (selfverify mode, fallback if the facilitator is down): pay USDC on devnet to `SOLANA_PAY_TO`, then
 
 ```
 curl -X POST localhost:4020/jobs -H 'content-type: application/json' -H "X-Solana-Tx: <signature>" \

@@ -32,5 +32,7 @@ Use: one line of background. A new payment rail does not fix a platform deciding
 
 ## Still unverified
 
-- x402.org facilitator `/supported` actually lists Solana devnet with scheme `exact` (network blocked from here — run `curl https://x402.org/facilitator/supported`).
+- **Verified 2026-10-10** `curl https://x402.org/facilitator/supported`: lists `{x402Version:2, scheme:"exact", network:"solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1", extra:{feePayer:"CKPKJWNdJEqa81x7CkZ14BVPiY6y16Sxs7owznqtWYp5", features:{smartWalletSupported:true}}}` and v1 `solana-devnet`. Our server config matches. Facilitator pays the Solana fee; the client must sign with that feePayer (handled by `@x402/svm/exact/client`, see `packages/x402-server/src/x402-client.ts`).
 - Whether AllScale gamma's Sepolia USDC is Circle's `0x1c7d…7238` (plan §8 Q3).
+
+- **Verification-one funding tx decoded (Sepolia `0xd7ea677e…c7eb`)**: tx `from` = AllScale relayer `0xc298…` (EIP-7702 gasless confirmed); token = `0x7169d38820dfd117c3fa1f22a697dba58d90ba06` (test USDT, not Circle USDC); operator EOA = `0x8f7bFB68A6E7c57094Ee2b34BC05eEBE0BEbEc9e`; transfers: 1.000000 USDT → claim-link contract `0x17b60025…`, 1.432000 USDT → `0x694db4a9…` (fee? ask tech what this is and the production fee schedule).

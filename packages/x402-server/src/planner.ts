@@ -76,7 +76,7 @@ export function splitLocations(req: string): string[] {
   // "A, B and C" / "A、B、C" / numbered lines → list
   return req
     .split(/\n|,|，|、|;|；| and | & /i)
-    .map((s) => s.replace(/^\s*\d+[.)]\s*/, "").trim())
+    .map((s) => s.replace(/^\s*\d+[.)]\s*/, "").replace(/\s*[—–-]\s.*$/, "").replace(/[?？].*$/, "").trim())
     .filter((s) => s.length > 1 && s.length < 80);
 }
 

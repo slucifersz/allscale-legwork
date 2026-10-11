@@ -18,7 +18,7 @@ Built during the Colosseum Crypto World's Fair Hackathon (Solana track), Oct 202
 1. A client calls the agent's x402 endpoint (`POST /jobs`) and pays USDC on Solana.
 2. The agent (AI planner) splits the request into on-site micro-tasks; rewards and acceptance criteria are fixed before any human sees them; the total is reserved against the job's revenue.
 3. Humans take tasks on the task board, go on site, submit a photo. Structural checks (EXIF time, GPS) are advisory.
-4. A person accepts → an **obligation** is created (one `reference_id`, amount never changes) → the orchestrator calls AllScale Auto-Payout → a claim link is funded from the operator's wallet → the worker gets an email and claims USDC with no wallet, no gas, no KYC.
+4. A person accepts → an **obligation** is created (one `reference_id`, amount never changes) → the orchestrator calls AllScale Auto-Payout → a claim link is funded from the operator's wallet → the worker gets an email and claims the stablecoin (USDT or USDC, whichever the operator wallet holds) with no wallet, no gas, no KYC.
 5. Meanwhile the job's Solana revenue is swept to the operator's EVM wallet via Circle CCTP, so the settlement record shows one money from client to human.
 6. The operator can revoke the agent's paying credential at any time; the agent then cannot pay.
 

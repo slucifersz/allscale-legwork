@@ -6,6 +6,7 @@
   "description": "Sweep the agent's Solana USDC into the operator's EVM wallet via Circle CCTP V2 (burn on Solana \u2192 attestation \u2192 mint on EVM).",
   "scripts": {
     "sweep": "node --import tsx src/sweep.ts",
+    "prep": "node --import tsx src/prep.ts",
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
