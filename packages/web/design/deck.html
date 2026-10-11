@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AllScale Legwork — Pitch</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c0b;--ink:#fff;--muted:#b9c1bc;--line:#2a2f2c;--ok:#3ddc84;--deep:#1f6b3d;--warn:#f0a842;--bad:#ff5a5a;--accent:#3ddc84;--k:1;
+--sans:"Archivo","Avenir Next","Helvetica Neue",system-ui,sans-serif;--mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:var(--bg);scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+body{margin:0;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;background:var(--bg)}
+a{color:var(--ok);text-decoration:none}a:hover{color:#8ff3bb}
+/* slides */
+.slide{position:relative;height:100vh;height:100svh;scroll-snap-align:start;overflow:hidden;background-color:var(--bg);
+background-image:radial-gradient(1.2px 1.2px at 23px 41px,rgba(255,255,255,.55),transparent 2px),radial-gradient(1px 1px at 151px 97px,rgba(255,255,255,.32),transparent 2px),radial-gradient(1px 1px at 88px 173px,rgba(255,255,255,.22),transparent 2px),radial-gradient(1.4px 1.4px at 211px 260px,rgba(255,255,255,.42),transparent 2px),radial-gradient(1px 1px at 330px 60px,rgba(255,255,255,.28),transparent 2px);
+background-size:233px 233px,317px 317px,191px 191px,419px 419px,373px 373px}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.slide+.slide{border-top:1px solid rgba(255,255,255,.03)}
+.canvas{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--k))}
+.glow{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(31,107,61,.6) 0%,rgba(31,107,61,.2) 38%,transparent 68%)}
+/* reveal */
+.r{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.slide.in .r{opacity:1;transform:none}
+/* fixed chrome */
+.chrome{position:fixed;z-index:20;pointer-events:none}
+.chrome>*{pointer-events:auto}
+.topnav{top:0;left:50%;transform:translateX(-50%) scale(var(--k));transform-origin:top center;padding-top:32px}
+.nav{display:flex;gap:2px;padding:6px;border-radius:999px;background:rgba(14,18,16,.66);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+border:1px solid transparent;background:linear-gradient(rgba(14,18,16,.7),rgba(14,18,16,.7)) padding-box,linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 50%,rgba(61,220,132,.22)) border-box;box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 24px rgba(61,220,132,.05)}
+.nav a{display:flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;font-size:19px;font-weight:500;color:#7f8a84;letter-spacing:-.01em;transition:color .3s,background .3s}
+.nav a:hover{color:#fff}
+.nav a.cur{color:#fff;background:rgba(255,255,255,.07)}
+.nav a::before{content:"";width:0;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);transition:width .3s var(--ease)}
+.nav a.cur::before{width:8px}
+.toplogo{top:0;left:0;transform:scale(var(--k));transform-origin:top left;padding:44px 0 0 60px;transition:opacity .4s}
+.rail{right:0;top:50%;transform:translateY(-50%) scale(var(--k));transform-origin:right center;padding-right:44px;display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.rail a{display:block;width:14px;height:2px;border-radius:2px;background:#3a403c;transition:width .4s var(--ease),background .4s}
+.rail a.cur{width:36px;background:var(--ok);box-shadow:0 0 10px rgba(61,220,132,.6)}
+.counter{white-space:nowrap;right:0;bottom:0;transform:scale(var(--k));transform-origin:bottom right;padding:0 60px 40px 0;font:500 19px var(--mono);color:#6f7a74;letter-spacing:.06em}
+.counter b{color:#fff;font-weight:500}
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:.42em;white-space:nowrap;letter-spacing:-.02em;color:#fff}
+.logo .br{position:relative;font-weight:700;padding:.16em .3em}
+.logo .br::before,.logo .br::after{content:"";position:absolute;width:.38em;height:.38em;border:0 solid var(--ok)}
+.logo .br::before{top:0;left:0;border-top-width:.1em;border-left-width:.1em}
+.logo .br::after{bottom:0;right:0;border-bottom-width:.1em;border-right-width:.1em}
+.logo .lw{font-weight:300;color:#e8ece9}
+/* type */
+h1,h2{margin:0;font-weight:500;letter-spacing:-.035em;line-height:1.02;text-wrap:balance}
+h1{font-size:100px}h2{font-size:84px}
+.kicker{display:flex;align-items:center;gap:16px;font:500 19px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ok);margin-bottom:34px}
+.kicker::before{content:"";width:40px;height:1.5px;background:linear-gradient(90deg,transparent,var(--ok))}
+.sub{font-size:30px;line-height:1.45;color:var(--muted);text-wrap:pretty;font-weight:400;letter-spacing:-.01em}
+.mono{font-family:var(--mono)}
+.g{color:var(--ok)}
+.dim{color:#7f8a84}
+/* glass */
+.glass{position:relative;border-radius:30px;border:1px solid transparent;
+background:linear-gradient(180deg,rgba(26,32,29,.78),rgba(11,14,12,.82)) padding-box,linear-gradient(170deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 35%,rgba(255,255,255,.02) 65%,rgba(61,220,132,.25)) border-box;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 60px rgba(61,220,132,.035),0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.glass.hot{background:linear-gradient(180deg,rgba(24,40,31,.82),rgba(11,16,13,.86)) padding-box,linear-gradient(170deg,rgba(61,220,132,.6),rgba(61,220,132,.08) 45%,rgba(61,220,132,.35)) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 80px rgba(31,107,61,.35),0 30px 80px rgba(0,0,0,.4)}
+.card{padding:40px}
+.card h3{margin:0 0 18px;font-size:36px;font-weight:500;letter-spacing:-.025em;line-height:1.12;text-wrap:balance}
+.card p{margin:0;font-size:24px;line-height:1.48;color:var(--muted);text-wrap:pretty}
+.idx{font:500 18px var(--mono);letter-spacing:.12em;color:#5f6a64}
+.pill{display:inline-flex;align-items:center;gap:12px;padding:13px 26px;border-radius:999px;font-size:22px;font-weight:500;color:#e6ebe8;white-space:nowrap;border:1px solid transparent;
+background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)) padding-box,linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04)) border-box;box-shadow:inset 0 0 18px rgba(61,220,132,.07);backdrop-filter:blur(10px)}
+.pill.lg{font-size:28px;padding:17px 34px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);flex:none}
+.pills{display:flex;flex-wrap:wrap;gap:14px}
+.ribbon .flow{animation:flow 1.6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.check{flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(61,220,132,.3),rgba(61,220,132,.08));border:1.5px solid var(--ok);box-shadow:0 0 30px rgba(61,220,132,.35),0 0 0 8px rgba(10,12,11,1)}
+.frame{display:flex;flex-direction:column;overflow:hidden;border-radius:26px}
+.frame-bar{display:flex;align-items:center;gap:14px;padding:18px 26px;border-bottom:1px solid rgba(255,255,255,.06);font-size:20px;color:var(--muted)}
+.live{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.frame iframe{flex:1;border:0;width:100%;background:var(--bg)}
+.step{display:inline-flex;align-items:center;gap:12px;font:500 19px var(--mono);letter-spacing:.14em;color:var(--ok);text-transform:uppercase}
+.step i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;border:1.5px solid var(--ok);color:#fff;letter-spacing:0;box-shadow:0 0 18px rgba(61,220,132,.35)}
+.caption{font-size:34px;line-height:1.3;color:#f2f5f3;letter-spacing:-.02em;font-weight:500;text-wrap:pretty}
+
+/* ===== simulated product demo (slides 6–9) ===== */
+.hidden{display:none!important}
+.app{flex:1;overflow:auto;font-size:20px;color:#e6ebe8}
+.app::-webkit-scrollbar{width:0}
+.lbl{font:600 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7d8781;margin-bottom:10px}
+.field{padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);color:#fff;font-size:20px;line-height:1.4}
+.field.big{min-height:96px}
+.dim2{color:#7d8781}
+.quote{display:flex;align-items:center;gap:16px;margin:22px 0;padding:16px 20px;border-radius:16px;border:1px solid rgba(61,220,132,.3);background:rgba(61,220,132,.05);font-size:18px;color:var(--muted)}
+.quote b{font-size:30px;color:#fff;font-weight:600;letter-spacing:-.03em}
+.quote .dim2{margin-left:auto}
+button.go{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border:0;border-radius:999px;background:var(--ok);color:#06130b;font:600 20px var(--sans);cursor:pointer;box-shadow:0 0 30px rgba(61,220,132,.35);transition:opacity .3s}
+button.go:hover{background:#5ae79a}
+button.go[disabled]{opacity:.3;cursor:default;box-shadow:none}
+button.go.sm{width:auto;min-height:44px;padding:0 20px;font-size:16px}
+button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(61,220,132,.45)}
+.hint{font-size:19px;color:#6f7a74}.hint b{color:var(--muted);font-weight:600}
+.idle{color:#5d6661;font-size:18px;padding:6px 2px}
+.agentdot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s ease-in-out infinite}
+/* timeline */
+.tl{margin-top:26px;display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .4s}
+.tl.on{opacity:1}
+.tli{display:grid;grid-template-columns:28px 1fr;gap:16px;padding:12px 0;opacity:.28;transition:opacity .4s}
+.tli i{width:22px;height:22px;border-radius:50%;border:2px solid #3a403c;margin-top:3px;display:grid;place-items:center;transition:all .3s}
+.tli b{display:block;font-size:19px;font-weight:500}
+.tli span{display:block;font-size:14px;color:var(--muted);margin-top:3px;word-break:break-all}
+.tli.run{opacity:1}.tli.run i{border-color:var(--warn);border-top-color:transparent;animation:spin 1s linear infinite}
+.tli.ok{opacity:1}.tli.ok i{border-color:var(--ok);background:var(--ok);animation:none}
+.tli.ok i::after{content:"";width:9px;height:5px;border-left:2.5px solid #06130b;border-bottom:2.5px solid #06130b;transform:rotate(-45deg) translate(1px,-1px)}
+/* agent console */
+.con{flex:1;overflow:auto;padding:22px 26px;font:500 17px/1.55 var(--mono);color:#cfd6d2;display:flex;flex-direction:column;gap:6px}
+.con::-webkit-scrollbar{width:0}
+.ln{opacity:0;transform:translateY(6px);animation:lnin .35s var(--ease) forwards;position:relative;padding-left:24px}
+.ln::before{content:"▸";color:var(--ok);position:absolute;left:0;top:0}
+.ln.ok{color:#fff}.ln.ok::before{content:"✓";color:var(--ok)}
+.ln.bad{color:#ffb3b3}.ln.bad::before{content:"✕";color:var(--bad)}
+.ln.dim{color:#7d8781}
+.ln.wait::before{content:"◌";color:var(--warn);animation:pulse 1s ease-in-out infinite}
+.ln b{color:var(--ok);font-weight:500}
+.ln a{color:var(--ok)}
+@keyframes lnin{to{opacity:1;transform:none}}
+/* settlement mini */
+.jobcard{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.jobcard.in{opacity:1;transform:none}
+.jh{font-size:15px;color:var(--muted)}.jh b{color:#fff}
+.now{display:flex;align-items:center;gap:12px;margin:16px 0 18px;font-size:20px;font-weight:500}
+.nowk{font:600 11px var(--mono);letter-spacing:.14em;padding:5px 10px;border-radius:999px;color:#06130b;background:var(--ok);box-shadow:0 0 18px rgba(61,220,132,.45)}
+.now.revoked .nowk{background:var(--bad);color:#1a0505}
+.mtrail{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.ms{position:relative;border:1.5px dashed #343a37;border-radius:14px;padding:12px 10px 10px;font-size:13px;line-height:1.25;color:#8e9892;min-height:78px;transition:all .4s}
+.ms span{display:block;font:600 11px var(--mono);letter-spacing:.1em;color:#5d6661;margin-bottom:6px}
+.ms em{display:block;font-style:normal;font-size:12px;color:#7d8781;margin-top:8px}
+.ms.wait{border-color:var(--warn);color:#e6ebe8}.ms.wait span{color:var(--warn)}
+.ms.done{border-style:solid;border-color:var(--ok);background:rgba(61,220,132,.08);color:#fff}.ms.done span{color:var(--ok)}
+.ms.bad{border-style:solid;border-color:var(--bad);background:rgba(255,90,90,.08);color:#fff}.ms.bad span{color:var(--bad)}
+.ms.here::after{content:"MONEY IS HERE";position:absolute;left:50%;top:-11px;transform:translateX(-50%);font:700 9px var(--mono);letter-spacing:.12em;padding:3px 8px;border-radius:999px;background:var(--ok);color:#06130b;white-space:nowrap}
+.ms.bad.here::after{background:var(--bad);color:#1a0505}
+.ms.flash{animation:msflash 1s var(--ease)}
+@keyframes msflash{0%{box-shadow:0 0 0 0 rgba(61,220,132,.7);background:rgba(61,220,132,.35)}30%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(61,220,132,.25),0 0 50px rgba(61,220,132,.5)}100%{box-shadow:0 0 0 0 transparent}}
+.mtrail.big{gap:24px}.mtrail.big .ms{min-height:150px;padding:18px 18px;font-size:20px;border-radius:20px}.mtrail.big .ms span{font-size:13px}.mtrail.big .ms em{font-size:15px;margin-top:12px}.mtrail.big .ms.here::after{font-size:11px;top:-13px}
+.mt{width:100%;border-collapse:collapse;margin-top:20px;font-size:15px}
+.mt th{text-align:left;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#7d8781;padding:0 8px 8px;border-bottom:1px solid var(--line)}
+.mt td{padding:10px 8px;border-bottom:1px solid rgba(42,47,44,.6);vertical-align:middle}
+.mt em{display:inline-block;font:500 12px var(--mono);padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:#d6ddd9;font-style:normal;transition:all .3s}
+.mt em.ok{color:var(--ok);border-color:rgba(61,220,132,.4);background:rgba(61,220,132,.07)}
+.mt em.warn{color:var(--warn);border-color:rgba(240,168,66,.4);background:rgba(240,168,66,.07)}
+.mt em.bad{color:var(--bad);border-color:rgba(255,90,90,.4);background:rgba(255,90,90,.08)}
+/* phone */
+.phone{width:390px;height:864px;border-radius:48px;overflow:auto;background:var(--bg);position:relative;padding:54px 16px 30px;color:#fff;font-size:15px}
+.phone::-webkit-scrollbar{width:0}
+.pnotch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000}
+.phead{display:flex;align-items:center;justify-content:space-between}
+.tpill{font:500 11px var(--mono);padding:3px 9px;border-radius:999px;color:var(--warn);border:1px solid rgba(240,168,66,.35);background:rgba(240,168,66,.07)}
+.pme{font:500 12px var(--mono);color:var(--muted);margin:12px 0 0;display:flex;align-items:center;gap:8px}
+.pme::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.ph2{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:26px 2px 10px;display:flex;justify-content:space-between}
+.ph2 span{color:#5d6661}
+.pempty{color:#6b746f;font-size:13px;padding:2px}
+.pcard{border-radius:20px;padding:16px;margin-bottom:10px;border:1px solid transparent;background:linear-gradient(180deg,rgba(26,32,29,.8),rgba(11,14,12,.84)) padding-box,linear-gradient(170deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 35%,rgba(61,220,132,.24)) border-box;animation:lnin .4s var(--ease)}
+.pcard.ready{box-shadow:0 0 36px rgba(31,107,61,.4)}
+.pt{font-size:15px;font-weight:500;line-height:1.3}
+.pamt{font:600 36px/1 var(--mono);letter-spacing:-.04em;margin:12px 0 4px}.pamt small{font-size:16px;color:var(--muted);margin-left:5px;letter-spacing:0;font-weight:500}
+.pcrit{margin-top:10px;padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);font:500 11px/1.5 var(--mono);color:var(--muted)}
+.pbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:46px;border-radius:999px;border:0;margin-top:12px;font:600 15px var(--sans);cursor:pointer}
+.pbtn.go{background:var(--ok);color:#06130b;box-shadow:0 0 24px rgba(61,220,132,.35)}
+.pbtn.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(61,220,132,.45)}
+.pbtn[disabled]{opacity:.35;cursor:default}
+.pphoto{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:104px;border-radius:16px;border:1.5px dashed rgba(61,220,132,.5);background:rgba(61,220,132,.05);font-weight:600;font-size:15px;cursor:pointer;margin-top:12px;overflow:hidden}
+.pphoto small{font:500 11px var(--mono);color:var(--muted)}
+.pphoto svg.shop{width:100%;height:150px;display:block}
+.pwait{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;border-radius:12px;border:1.5px dashed rgba(240,168,66,.5);color:var(--warn);font-weight:500;font-size:14px}
+.pspin{width:14px;height:14px;border-radius:50%;border:2px solid rgba(240,168,66,.25);border-top-color:var(--warn);animation:spin 1s linear infinite;flex:none}
+.pclaimed{display:flex;align-items:center;gap:8px;margin-top:12px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(61,220,132,.35);font:500 12px var(--mono);color:var(--ok)}
+.pfoot{margin-top:24px;text-align:center;font-size:11px;color:#6b746f}
+.pmodal{position:absolute;inset:0;background:rgba(5,7,6,.86);backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:16px;animation:lnin .3s var(--ease)}
+.pmbox{width:100%;border-radius:28px;padding:22px 20px;background:#0f1411;border:1px solid rgba(61,220,132,.3)}
+.pmlogo{display:flex;justify-content:space-between;align-items:center}
+.pmamt{font-size:40px;font-weight:600;letter-spacing:-.04em;margin-top:18px}.pmamt small{font-size:16px;color:var(--muted)}
+.pmsub{font-size:12px;color:var(--muted);margin-top:4px}
+.pmbox .field{font-size:15px;padding:11px 14px}
+.pmbox button.go{min-height:50px;font-size:16px}
+/* operator policy */
+.budget{margin-top:4px}
+.bbar{height:10px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden}
+.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f6b3d,var(--ok));border-radius:10px;transition:width .8s var(--ease)}
+.bbar.off i{background:#5d6661}
+.bnums{display:flex;justify-content:space-between;margin-top:8px;font-size:15px;color:var(--muted)}.bnums b{color:#fff;font-weight:500}
+.policy{display:flex;flex-direction:column;gap:10px}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:19px}
+.prow.treas{flex-wrap:wrap}.prow.treas .mono b{font-size:24px;color:#fff;font-weight:500}
+.sw{width:58px;height:32px;border-radius:999px;background:#2a2f2c;position:relative;cursor:pointer;transition:background .3s;flex:none}
+.sw i{position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#8e9892;transition:all .3s}
+.sw.on{background:var(--ok)}.sw.on i{left:30px;background:#06130b}
+.sw.off{background:var(--bad)}.sw.off i{left:4px;background:#1a0505}
+.events{overflow:auto;display:flex;flex-direction:column;gap:10px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;border:1px solid rgba(61,220,132,.3);background:rgba(61,220,132,.05);animation:lnin .4s var(--ease);font-size:17px}
+.ev .k{font:500 12px var(--mono);color:var(--muted)}
+.ev.bad{border:1.5px solid var(--bad);background:linear-gradient(180deg,rgba(255,90,90,.12),rgba(255,90,90,.03));box-shadow:0 0 30px rgba(255,90,90,.12)}
+.ev.bad b{display:block;font-size:19px;font-weight:700;color:#fff}
+.ev.bad .k{color:#ffb3b3}
+.ev .shield{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,90,90,.12);border:1px solid rgba(255,90,90,.4)}
+.ev .okc{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--ok)}
+.ev .warnc{width:40px;height:40px;border-radius:50%;border:2px solid rgba(240,168,66,.25);border-top-color:var(--warn);animation:spin 1s linear infinite}
+.prog{display:flex;align-items:center;gap:12px}
+.prog .bar{flex:1;height:6px;border-radius:6px;background:rgba(240,168,66,.15);overflow:hidden}.prog .bar i{display:block;height:100%;width:0;background:var(--warn);transition:width .2s linear}
+/* receipt */
+.rrow{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid rgba(42,47,44,.7)}
+.rrow>span:first-child{color:var(--muted)}
+.rrow a{font-size:20px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="rib" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#1f6b3d" stop-opacity=".25"/>
+      <stop offset=".3" stop-color="#3ddc84" stop-opacity=".95"/>
+      <stop offset=".65" stop-color="#2fb46b" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#1f6b3d" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="ribB" x1="0" x2="1"><stop offset="0" stop-color="#1f6b3d" stop-opacity=".15"/><stop offset=".5" stop-color="#1f6b3d" stop-opacity=".8"/><stop offset="1" stop-color="#1f6b3d" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="ribV" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3ddc84"/><stop offset="1" stop-color="#1f6b3d" stop-opacity=".2"/></linearGradient>
+    <filter id="blur30" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
+    <filter id="blur6" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="coin" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+</svg>
+
+<div class="chrome toplogo" id="toplogo"><span class="logo" style="font-size:24px"><span class="br">AllScale</span><span class="lw">Legwork</span></span></div>
+<div class="chrome topnav"><nav class="nav" id="nav"></nav></div>
+<div class="chrome rail" id="rail"></div>
+<div class="chrome counter" id="counter"></div>
+
+<!-- 01 Title -->
+<section class="slide" id="s1" data-section="Intro" data-screen-label="01 Title">
+ <div class="canvas">
+  <div class="glow" style="width:1500px;height:1500px;left:780px;top:-160px"></div>
+  <svg class="ribbon r" viewBox="0 0 1100 620" width="760" height="428" style="position:absolute;left:1100px;top:360px;overflow:visible;transition-delay:.25s">
+    <path id="inf" d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="url(#ribB)" stroke-width="140" filter="url(#blur30)"/>
+    <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="url(#rib)" stroke-width="54" opacity=".22"/>
+    <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="url(#rib)" stroke-width="18" opacity=".7" filter="url(#blur6)"/>
+    <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="#a8f5cb" stroke-width="2" opacity=".9"/>
+    <path class="flow" d="M550 334 C 690 150, 980 150, 984 310 C 980 470, 690 470, 550 286 C 410 150, 120 150, 116 310 C 120 470, 410 470, 550 334" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".6"/>
+    <circle r="9" fill="#d9ffe9" filter="url(#coin)"><animateMotion dur="7s" repeatCount="indefinite" path="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z"/></circle>
+  </svg>
+  <div style="position:absolute;left:140px;top:210px;width:920px">
+    <div class="logo r" style="font-size:60px"><span class="br">AllScale</span><span class="lw">Legwork</span></div>
+    <h1 class="r" style="margin-top:72px;transition-delay:.1s">The payroll rail for AI agents that <span class="g">hire humans.</span></h1>
+    <p class="sub r" style="margin:40px 0 0;max-width:900px;transition-delay:.2s">An AI agent earns USDC on Solana, hands the on-site work to real people, and pays them by email — no wallet, no gas, no KYC.</p>
+  </div>
+  <div class="pills r" style="position:absolute;left:140px;bottom:80px;transition-delay:.35s">
+    <span class="pill">Solana</span><span class="pill">x402</span><span class="pill">AllScale</span><span class="pill">Circle CCTP</span><span class="pill"><span class="dot"></span>Colosseum Crypto World's Fair 2026</span>
+  </div>
+ </div>
+</section>
+
+<!-- 02 Gap -->
+<section class="slide" id="s2" data-section="Problem" data-screen-label="02 The gap">
+ <div class="canvas">
+  <div class="glow" style="width:1200px;height:1200px;left:1000px;top:120px;opacity:.75"></div>
+  <div style="position:absolute;left:140px;top:170px;right:140px">
+    <div class="kicker r">The gap</div>
+    <h2 class="r" style="max-width:1500px;transition-delay:.08s">Agents can earn now. They still can't pay the people they need.</h2>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;top:460px;display:grid;grid-template-columns:600px 1fr;gap:24px">
+    <div style="display:grid;grid-template-rows:auto auto;gap:24px;align-content:start">
+      <div class="glass card r" style="padding:28px 34px;transition-delay:.15s"><div class="idx" style="margin-bottom:16px">01</div><h3 style="font-size:32px;margin-bottom:12px">x402 gave agents an income.</h3><p style="font-size:22px">Any agent can charge for a request in USDC on Solana today.</p></div>
+      <div class="glass card r" style="padding:28px 34px;transition-delay:.25s"><div class="idx" style="margin-bottom:16px">02</div><h3 style="font-size:32px;margin-bottom:12px">The work agents can't do is physical, local, and human.</h3><p style="font-size:22px">Photograph a storefront. Check a shelf. Verify an address. Someone has to be there.</p></div>
+    </div>
+    <div class="glass hot card r" style="padding:36px 44px;display:grid;grid-template-columns:330px 1fr;gap:44px;align-items:start;transition-delay:.35s">
+      <div>
+        <div class="idx" style="margin-bottom:24px">03</div>
+        <div class="mono g" style="font-size:132px;font-weight:500;line-height:.9;letter-spacing:-.06em;text-shadow:0 0 60px rgba(61,220,132,.35)">1.4B</div>
+        <h3 style="margin-top:28px;font-size:38px;margin-bottom:0">Those people have no wallet.</h3>
+      </div>
+      <p style="font-size:23px;padding-top:42px">1.4 billion adults are unbanked (World Bank Findex). Remotasks switched off Kenya, Nigeria and Pakistan overnight in 2024 and workers lost their income. Stripe's self-serve cross-border payouts cover only the US, UK, EEA, Canada and Switzerland — so today's "hire-a-human" agents can only pay the rich world.</p>
+    </div>
+  </div>
+  <div class="r" style="position:absolute;left:140px;right:140px;bottom:70px;display:flex;align-items:center;gap:26px;transition-delay:.5s">
+    <svg width="220" height="24" viewBox="0 0 220 24"><path d="M2 12H170" stroke="url(#rib)" stroke-width="3" stroke-linecap="round"/><path d="M180 12H210" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity=".5"/><circle cx="214" cy="12" r="5" fill="none" stroke="#ff5a5a" stroke-width="2"/></svg>
+    <div class="g" style="font-size:40px;font-weight:500;letter-spacing:-.025em">Agent income has no exit to the people who actually do the legwork.</div>
+  </div>
+ </div>
+</section>
+
+<!-- 03 Product -->
+<section class="slide" id="s3" data-section="Product" data-screen-label="03 The product">
+ <div class="canvas">
+  <div class="glow" style="width:1300px;height:1000px;left:200px;top:220px"></div>
+  <div style="position:absolute;left:140px;top:170px">
+    <div class="kicker r">The product</div>
+    <h2 class="r" style="transition-delay:.08s">One rail. <span class="dim">Solana in,</span> humans out.</h2>
+  </div>
+  <div class="r" style="position:absolute;left:140px;top:430px;width:1230px;height:420px;transition-delay:.2s">
+    <svg class="ribbon" viewBox="0 0 1230 420" width="1230" height="420" style="position:absolute;inset:0;overflow:visible">
+      <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="url(#ribB)" stroke-width="140" filter="url(#blur30)"/>
+      <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="url(#rib)" stroke-width="40" opacity=".25"/>
+      <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="url(#rib)" stroke-width="12" opacity=".7" filter="url(#blur6)"/>
+      <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="#a8f5cb" stroke-width="2"/>
+      <path class="flow" d="M100 214 C 260 104, 420 324, 615 214 S 970 104, 1130 214" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".7"/>
+      <circle r="9" fill="#d9ffe9" filter="url(#coin)"><animateMotion dur="4.5s" repeatCount="indefinite" path="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190"/></circle>
+    </svg>
+    <div class="glass" style="position:absolute;left:0;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg>
+      <div style="font-size:32px;font-weight:500">Client</div></div>
+    <div class="glass hot" style="position:absolute;left:515px;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 16h5"/></svg>
+      <div style="font-size:32px;font-weight:500">Agent</div></div>
+    <div class="glass" style="position:absolute;left:1030px;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>
+      <div style="font-size:22px;font-weight:500;line-height:1.15;padding:0 22px">Any person with an email</div></div>
+    <span class="pill" style="position:absolute;left:190px;top:0;font-size:21px"><span class="mono g">x402</span> · USDC on Solana <span class="g">→</span></span>
+    <span class="pill" style="position:absolute;left:735px;top:0;font-size:21px">AllScale Claim Link <span class="g">→</span></span>
+    <div class="pills" style="position:absolute;left:0;right:0;top:340px;justify-content:center;gap:18px">
+      <span class="pill lg"><span class="dot"></span>No wallet</span><span class="pill lg"><span class="dot"></span>No gas</span><span class="pill lg"><span class="dot"></span>No KYC</span>
+    </div>
+  </div>
+  <div class="glass card r" style="position:absolute;left:1430px;top:420px;width:350px;padding:36px;transition-delay:.35s">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="mono g" style="font-size:18px;letter-spacing:.14em;font-weight:600">OPERATOR CONTROL</span></div>
+    <p style="font-size:24px;color:#e6ebe8;margin:0;line-height:1.5">The operator sets the budget. The operator can revoke the agent's spending authority at any time. <span class="g">The agent never holds a key.</span></p>
+  </div>
+  <div class="glass r" style="position:absolute;left:140px;right:140px;bottom:76px;padding:22px 30px;border-radius:999px;display:flex;align-items:center;gap:22px;transition-delay:.45s">
+    <span class="pill mono" style="font-size:19px;padding:8px 18px">CCTP</span>
+    <span style="font-size:26px;color:#e6ebe8">Solana revenue is swept to the operator's treasury via Circle CCTP — one treasury, every chain.</span>
+  </div>
+ </div>
+</section>
+
+<!-- 04 Infrastructure -->
+<section class="slide" id="s4" data-section="Infrastructure" data-screen-label="04 Why AllScale">
+ <div class="canvas">
+  <div class="glow" style="width:1700px;height:900px;left:110px;top:460px;opacity:.7"></div>
+  <div style="position:absolute;left:140px;top:170px;right:140px">
+    <div class="kicker r">Why only on AllScale</div>
+    <h2 class="r" style="max-width:1500px;transition-delay:.08s">We didn't build a payout system. <span class="g">We plugged into one.</span></h2>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;top:460px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+    <div class="glass card r" style="padding:32px;min-height:400px;transition-delay:.15s"><div class="mono g" style="font-size:40px;letter-spacing:-.03em;margin-bottom:28px">email → USDC</div><h3>Claim Link</h3><p>The recipient claims with an email code. Funds sit in escrow until claimed; unclaimed funds return to the operator automatically.</p></div>
+    <div class="glass card r" style="padding:32px;min-height:400px;transition-delay:.22s"><div class="mono g" style="font-size:40px;letter-spacing:-.03em;margin-bottom:28px">&lt; 90 s</div><h3>Auto-Payout</h3><p>The agent funds a claim link with one signed API call. Settled on-chain in under 90 seconds.</p></div>
+    <div class="glass card r" style="padding:32px;min-height:400px;transition-delay:.29s"><div class="mono g" style="font-size:40px;letter-spacing:-.03em;margin-bottom:28px">0 gas</div><h3>Gasless by design</h3><p><span class="mono" style="color:#e6ebe8">EIP-7702</span> delegation: the operator's wallet pays, nobody buys gas, nobody touches a seed phrase.</p></div>
+    <div class="glass hot card r" style="padding:32px;min-height:400px;transition-delay:.36s"><div class="mono g" style="font-size:40px;letter-spacing:-.03em;margin-bottom:28px">revocable</div><h3>Revocable authority</h3><p>The agent runs on an operator-granted credential with a spending limit. Pull the authorization in the dashboard and the next payout is refused on-chain policy.</p></div>
+  </div>
+  <div class="r" style="position:absolute;left:140px;bottom:86px;display:flex;align-items:center;gap:22px;font-size:24px;color:var(--muted);transition-delay:.45s">
+    <span class="logo" style="font-size:26px"><span class="br">AllScale</span></span>
+    Built on AllScale, stablecoin payment infrastructure backed by YZi Labs and Animoca Brands.
+  </div>
+ </div>
+</section>
+
+<!-- 05 Proof -->
+<section class="slide" id="s5" data-section="Proof" data-screen-label="05 Live on-chain">
+ <div class="canvas">
+  <div class="glow" style="width:1000px;height:1000px;left:-260px;top:280px;opacity:.85"></div>
+  <div style="position:absolute;left:140px;top:170px">
+    <div class="kicker r">Proof</div>
+    <h2 class="r" style="transition-delay:.08s">Every leg is already settled <span class="g">on-chain.</span></h2>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;top:420px">
+    <svg width="6" height="430" style="position:absolute;left:25px;top:40px" class="r"><rect width="3" height="430" x="1.5" rx="1.5" fill="url(#ribV)"/></svg>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.15s">
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="glass" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Agent paid via x402</span><a href="#" class="mono" style="font-size:24px">yGeuCDHCyZ86…kUkVzYq6 ↗</a><span class="pill" style="font-size:20px">Solana devnet</span></div>
+      </div>
+      <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.25s">
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="glass" style="padding:20px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Revenue swept via CCTP</span><span class="mono" style="font-size:22px;color:var(--muted);line-height:1.6">burn <a href="#">DajXP1mtgbqu…mL3h3mF ↗</a><br>mint <a href="#">0xf511fedfc79e…222b6da1c ↗</a></span><span class="pill" style="font-size:20px">Solana → Sepolia</span></div>
+      </div>
+      <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.35s">
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="glass hot" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Worker paid via AllScale claim link</span><a href="#" class="mono" style="font-size:24px">0xd7ea677e422a…5303c7eb ↗</a><span class="pill" style="font-size:20px">Sepolia · <span class="mono g" style="font-size:24px">14.9 s</span></span></div>
+      </div>
+      <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.45s">
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div class="glass" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Operator revoked the agent</span><span style="font-size:24px;color:var(--muted)">payout refused with <span class="mono" style="color:var(--bad)">policy_denied</span></span><span class="pill" style="font-size:20px">AllScale policy engine</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pills r" style="position:absolute;left:226px;bottom:76px;transition-delay:.55s">
+    <span class="pill"><span class="mono">x402 v2</span> · exact scheme</span><span class="pill mono">CCTP v2</span><span class="pill mono">EIP-7702</span><span class="pill">Idempotent payouts</span>
+  </div>
+ </div>
+</section>
+
+<!-- 06 Demo · the agent gets paid -->
+<section class="slide" id="s6" data-section="Demo" data-screen-label="06 Demo · agent earns">
+ <div class="canvas">
+  <div class="glow" style="width:1400px;height:1000px;left:-100px;top:200px;opacity:.6"></div>
+  <div class="r" style="position:absolute;left:96px;top:118px;display:flex;align-items:center;gap:22px"><span class="step"><i>1</i>The agent gets paid</span><span class="caption" style="font-size:26px;color:var(--muted)">A client hires the agent. The agent plans the work and posts it for humans.</span></div>
+  <!-- client panel -->
+  <div class="glass frame r" style="position:absolute;left:96px;top:190px;width:560px;height:700px;transition-delay:.1s">
+    <div class="frame-bar"><span class="live"></span><span style="color:#fff">Client</span><span class="mono" style="margin-left:auto;font-size:17px;color:#6f7a74">wallet 4FnV…wdt1</span></div>
+    <div class="app" style="padding:30px">
+      <div class="lbl">What do you need checked?</div>
+      <div class="field big" id="req">天河区 A店, B店, C店 — open today? What's posted on the door?</div>
+      <div class="quote"><span>Agent quote</span><b class="mono">9.00 USDC</b><span class="mono dim2">x402 · Solana</span></div>
+      <button class="go" id="payBtn" onclick="D.pay()">Pay 9 USDC · x402</button>
+      <div class="tl" id="payTl">
+        <div class="tli"><i></i><div><b>402 Payment Required</b><span class="mono">agent quoted 9.00 USDC · pay to H1Gn…3xn8</span></div></div>
+        <div class="tli"><i></i><div><b>Payment signed</b><span class="mono">client 4FnV…wdt1 · fee paid by facilitator CKPK…WYp5</span></div></div>
+        <div class="tli"><i></i><div><b>Settled on Solana</b><span class="mono"><a href="https://explorer.solana.com/tx/yGeuCDHCyZ86dLDRdfv1baLRGdx7mpqGDMMdGDsURwg7G3BhnFdYEX6Aa3LQziJt4ji5AjNZPcjVqoMkUkVzYq6?cluster=devnet" target="_blank" rel="noopener">yGeuCDHC…kVzYq6 ↗</a></span></div></div>
+        <div class="tli"><i></i><div><b>Job accepted by the agent</b><span class="mono">job_93143d6c · 3 tasks posted</span></div></div>
+      </div>
+    </div>
+  </div>
+  <!-- agent console -->
+  <div class="glass frame r" style="position:absolute;left:684px;top:190px;width:560px;height:700px;background:rgba(5,7,6,.92);transition-delay:.18s">
+    <div class="frame-bar"><span class="agentdot"></span><span style="color:#fff">Agent</span><span class="mono" style="margin-left:auto;font-size:17px;color:#6f7a74">legwork-agent · H1Gn…3xn8</span></div>
+    <div class="con" data-con="s6"><div class="idle">waiting for a client…</div></div>
+  </div>
+  <!-- settlement mini -->
+  <div class="glass frame r" style="position:absolute;left:1272px;top:190px;width:552px;height:700px;transition-delay:.26s">
+    <div class="frame-bar"><span class="live"></span><span style="color:#fff">Settlement record</span><span class="mono" style="margin-left:auto;font-size:17px;color:#6f7a74">public</span></div>
+    <div class="app" style="padding:26px">
+      <div class="idle" id="noJob">No jobs yet. The first x402 payment will appear here.</div>
+      <div class="jobcard hidden" id="jobCard">
+        <div class="jh mono">Job job_93143d6c · <b>9.00 USDC</b> on Solana · <a href="https://explorer.solana.com/tx/yGeuCDHCyZ86dLDRdfv1baLRGdx7mpqGDMMdGDsURwg7G3BhnFdYEX6Aa3LQziJt4ji5AjNZPcjVqoMkUkVzYq6?cluster=devnet" target="_blank" rel="noopener">yGeu…zYq6 ↗</a></div>
+        <div class="now"><span class="nowk">MONEY IS NOW</span><span data-now>Received on Solana</span></div>
+        <div class="mtrail" data-trail>
+          <div class="ms" data-ms="1"><span>01</span>Client paid</div>
+          <div class="ms" data-ms="2"><span>02</span>CCTP burn</div>
+          <div class="ms" data-ms="3"><span>03</span>Minted to operator</div>
+          <div class="ms" data-ms="4"><span>04</span>Claim links funded</div>
+          <div class="ms" data-ms="5"><span>05</span>Claimed by humans</div>
+        </div>
+        <table class="mt">
+          <tr><th>Task</th><th>State</th><th>Payment</th><th>Claim</th></tr>
+          <tr data-task="a"><td>On-site photo · 天河区 A店<div class="mono dim2">2.70 USDT</div></td><td><em data-st>open</em></td><td><em data-pay>—</em></td><td><em data-cl>—</em></td></tr>
+          <tr data-task="b"><td>On-site photo · B店<div class="mono dim2">2.70 USDT</div></td><td><em data-st>open</em></td><td><em data-pay>—</em></td><td><em data-cl>—</em></td></tr>
+          <tr data-task="c"><td>On-site photo · C店<div class="mono dim2">2.70 USDT</div></td><td><em data-st>open</em></td><td><em data-pay>—</em></td><td><em data-cl>—</em></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="r hint" style="position:absolute;left:96px;bottom:40px;transition-delay:.3s">Click <b>Pay</b> · or press <b>A</b> to autoplay the whole demo · <b>R</b> resets</div>
+ </div>
+</section>
+
+<!-- 07 Demo · a person gets paid -->
+<section class="slide" id="s7" data-section="Demo" data-screen-label="07 Demo · person paid">
+ <div class="canvas">
+  <div class="glow" style="width:1300px;height:1300px;left:310px;top:-100px"></div>
+  <div style="position:absolute;left:120px;top:150px;width:600px">
+    <div class="step r"><i>2</i>A person does the legwork</div>
+    <div class="r" style="margin-top:30px;font-size:50px;line-height:1.08;font-weight:500;letter-spacing:-.03em;transition-delay:.1s">Take a task, submit a photo, get paid by email.</div>
+    <div class="glass frame r" style="margin-top:34px;height:470px;background:rgba(5,7,6,.92);transition-delay:.2s">
+      <div class="frame-bar"><span class="agentdot"></span><span style="color:#fff">Agent</span></div>
+      <div class="con" data-con="s7"><div class="idle">waiting for submissions…</div></div>
+    </div>
+  </div>
+  <!-- phone -->
+  <div class="r" style="position:absolute;left:753px;top:92px;width:414px;height:888px;border-radius:60px;padding:12px;background:linear-gradient(160deg,#3a403c,#121513 30%,#0c0f0d 70%,#2a2f2c);box-shadow:0 0 0 1px #3a403c,0 0 140px rgba(61,220,132,.22),0 60px 140px rgba(0,0,0,.75);transition-delay:.12s">
+    <div class="phone" id="phone">
+      <div class="pnotch"></div>
+      <div class="phead"><span class="logo" style="font-size:16px"><span class="br">AllScale</span><span class="lw">Legwork</span></span><span class="tpill">TESTNET</span></div>
+      <div class="pme">worker@legwork.demo</div>
+      <div class="ph2">Your payments <span data-cnt="pay">0</span></div>
+      <div id="payList"><div class="pempty">Nothing yet — accepted work shows up here with a claim button.</div></div>
+      <div class="ph2">Your tasks <span data-cnt="mine">0</span></div>
+      <div id="mineList"><div class="pempty">—</div></div>
+      <div class="ph2">Open tasks <span data-cnt="open">3</span></div>
+      <div id="openList">
+        <div class="pcard" data-open="a"><div class="pt">On-site photo · 天河区 A店</div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><button class="pbtn glass" onclick="D.take()">Take this task</button></div>
+        <div class="pcard" data-open="b"><div class="pt">On-site photo · B店</div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><button class="pbtn glass" disabled>Take this task</button></div>
+        <div class="pcard" data-open="c"><div class="pt">On-site photo · C店</div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><button class="pbtn glass" disabled>Take this task</button></div>
+      </div>
+      <div class="pfoot">Paid via AllScale claim link · Powered by AllScale</div>
+      <!-- claim modal -->
+      <div class="pmodal hidden" id="claimModal">
+        <div class="pmbox">
+          <div class="pmlogo"><span class="logo" style="font-size:18px"><span class="br">AllScale</span></span><span class="tpill">CLAIM LINK</span></div>
+          <div class="pmamt mono">2.70 <small>USDT</small></div>
+          <div class="pmsub">from legwork-agent · Sepolia</div>
+          <div class="lbl" style="margin-top:18px">Email</div><div class="field">worker@legwork.demo</div>
+          <div class="lbl" style="margin-top:12px">Verification code</div><div class="field mono" id="otp">······</div>
+          <button class="go" id="claimBtn" style="margin-top:18px" onclick="D.claimConfirm()">Claim</button>
+          <div class="pmsub" style="margin-top:12px">No wallet needed. Gas paid by the operator.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;left:1270px;top:380px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+    <span class="pill lg r" style="transition-delay:.25s"><span class="dot"></span>No wallet</span>
+    <span class="pill lg r" style="transition-delay:.32s"><span class="dot"></span>No gas</span>
+    <span class="pill lg r" style="transition-delay:.39s"><span class="dot"></span>No KYC</span>
+  </div>
+ </div>
+</section>
+
+<!-- 08 Demo · the agent pays, the operator stays in control -->
+<section class="slide" id="s8" data-section="Demo" data-screen-label="08 Demo · agent pays">
+ <div class="canvas">
+  <div class="glow" style="width:1700px;height:900px;left:110px;top:320px;opacity:.6"></div>
+  <div class="r" style="position:absolute;left:96px;top:118px;display:flex;align-items:center;gap:22px"><span class="step"><i>3</i>The agent pays. The operator sets the rules.</span></div>
+  <!-- agent console -->
+  <div class="glass frame r" style="position:absolute;left:96px;top:190px;width:840px;height:700px;background:rgba(5,7,6,.92);transition-delay:.1s">
+    <div class="frame-bar"><span class="agentdot"></span><span style="color:#fff">Agent</span><span class="mono" style="margin-left:auto;font-size:17px;color:#6f7a74">reviews · pays · reports</span></div>
+    <div class="con" data-con="s8"><div class="idle">waiting for submissions…</div></div>
+  </div>
+  <!-- operator policy -->
+  <div class="glass frame r" style="position:absolute;left:964px;top:190px;width:860px;height:700px;transition-delay:.18s">
+    <div class="frame-bar"><span class="live"></span><span style="color:#fff">Operator policy</span><span class="mono" style="margin-left:auto;font-size:17px;color:#6f7a74">AllScale dashboard · 0x8f7b…ec9e</span></div>
+    <div class="app" style="padding:30px;display:grid;grid-template-rows:auto auto 1fr;gap:22px">
+      <div>
+        <div class="lbl">Agent budget</div>
+        <div class="budget"><div class="bbar"><i id="bfill" style="width:0%"></i></div><div class="bnums mono"><span>spent <b id="bspent">0.00</b> USDT</span><span>cap <b>50.00</b> USDT · per task ≤ 5.00</span></div></div>
+      </div>
+      <div class="policy">
+        <div class="prow"><span>Auto-pay when checks pass</span><span class="sw on"><i></i></span></div>
+        <div class="prow"><span>Agent spending authority</span><span class="sw on" id="authSw" onclick="D.revoke()"><i></i></span></div>
+        <div class="prow treas"><span>Treasury · Sepolia USDC</span><span class="mono"><b id="treas">20.00</b> USDC</span><button class="go sm" id="sweepBtn" onclick="D.sweep()" disabled>Sweep 9 USDC from Solana</button></div>
+      </div>
+      <div class="events" id="events"><div class="idle">Policy events will appear here.</div></div>
+    </div>
+  </div>
+  <div class="r hint" style="position:absolute;left:96px;bottom:40px;transition-delay:.3s">The agent pays on its own · flip <b>Agent spending authority</b> to see it refused · then <b>Sweep</b></div>
+ </div>
+</section>
+
+<!-- 09 Demo · receipt -->
+<section class="slide" id="s9" data-section="Demo" data-screen-label="09 Demo · receipt">
+ <div class="canvas">
+  <div class="glow" style="width:1600px;height:1200px;left:160px;top:-100px"></div>
+  <div style="position:absolute;left:140px;top:150px;right:140px">
+    <div class="kicker r">One job, end to end</div>
+    <h2 class="r" style="font-size:72px;transition-delay:.08s">The agent earned, hired, paid and reported. <span class="g">The operator set the rules and pulled the plug once.</span></h2>
+  </div>
+  <div class="r" style="position:absolute;left:140px;right:140px;top:470px;transition-delay:.2s">
+    <div class="mtrail big" data-trail>
+      <div class="ms" data-ms="1"><span>01</span>Client paid<em class="mono">9.00 USDC · Solana</em></div>
+      <div class="ms" data-ms="2"><span>02</span>CCTP burn<em class="mono">Solana</em></div>
+      <div class="ms" data-ms="3"><span>03</span>Minted to operator<em class="mono">Sepolia</em></div>
+      <div class="ms" data-ms="4"><span>04</span>Claim links funded<em class="mono" data-fundedtxt>0 / 3</em></div>
+      <div class="ms" data-ms="5"><span>05</span>Claimed by humans<em class="mono" data-claimedtxt>0 claimed</em></div>
+    </div>
+  </div>
+  <div class="r" style="position:absolute;left:140px;right:140px;top:700px;display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;font-size:22px;transition-delay:.3s" id="receipt">
+    <div class="rrow"><span>x402 settlement</span><a class="mono" href="https://explorer.solana.com/tx/yGeuCDHCyZ86dLDRdfv1baLRGdx7mpqGDMMdGDsURwg7G3BhnFdYEX6Aa3LQziJt4ji5AjNZPcjVqoMkUkVzYq6?cluster=devnet" target="_blank" rel="noopener">yGeuCDHCyZ86…kUkVzYq6 ↗</a></div>
+    <div class="rrow"><span>AllScale payout</span><a class="mono" href="https://sepolia.etherscan.io/tx/0xd7ea677e422adb1a3b87cd8539888e47ba89460069dd93efada7f0b05303c7eb" target="_blank" rel="noopener">0xd7ea677e422a…5303c7eb ↗</a></div>
+    <div class="rrow"><span>CCTP burn</span><a class="mono" href="https://explorer.solana.com/tx/DajXP1mtgbquuU3UbW7GCvmWvDdHKmD4f4jJso7tgE2EaGau6eM6tw7j3QdjFwZV1ELeQQzPW9KW1ciYmL3h3mF?cluster=devnet" target="_blank" rel="noopener">DajXP1mtgbqu…mL3h3mF ↗</a></div>
+    <div class="rrow"><span>CCTP mint</span><a class="mono" href="https://sepolia.etherscan.io/tx/0xf511fedfc79e536b12c57b03458dee5326ec28dad32cc2975bbe161222b6da1c" target="_blank" rel="noopener">0xf511fedfc79e…222b6da1c ↗</a></div>
+    <div class="rrow"><span>Operator revoke</span><span class="mono" style="color:var(--bad)">policy_denied · no funds moved</span></div>
+    <div class="rrow"><span>Summary</span><span class="mono g" id="sumline">9 USDC in · 0 people paid · 0 refused</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- 10 Vision -->
+<section class="slide" id="s10" data-section="Vision" data-screen-label="09 Where this goes">
+ <div class="canvas">
+  <div class="glow" style="width:1700px;height:1700px;left:110px;top:200px"></div>
+  <svg class="ribbon r" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;inset:0;transition-delay:.3s">
+    <path d="M-60 900 C 380 900, 620 700, 980 730 S 1600 920, 1990 820" fill="none" stroke="url(#ribB)" stroke-width="160" filter="url(#blur30)" opacity=".8"/>
+    <path d="M-60 900 C 380 900, 620 700, 980 730 S 1600 920, 1990 820" fill="none" stroke="#a8f5cb" stroke-width="2" opacity=".45"/>
+    <path class="flow" d="M-60 926 C 380 926, 620 734, 980 764 S 1600 954, 1990 854" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".45"/>
+  </svg>
+  <div style="position:absolute;left:140px;top:170px;right:140px">
+    <div class="kicker r">Where this goes</div>
+    <h2 class="r" style="max-width:1500px;transition-delay:.08s">Every agent that hires a human will need <span class="g">a rail like this.</span></h2>
+  </div>
+  <div style="position:absolute;left:140px;top:470px;width:1460px;display:flex;flex-direction:column;gap:18px">
+    <div class="glass r" style="padding:20px 26px;border-radius:999px;display:flex;align-items:center;gap:30px;transition-delay:.15s"><span class="pill lg" style="min-width:560px"><span class="dot"></span>One-line integration</span><span style="font-size:26px;color:var(--muted)"><span class="mono" style="color:#fff">allscale payout send --email</span> from the AllScale CLI, any agent framework.</span></div>
+    <div class="glass r" style="padding:20px 26px;border-radius:999px;display:flex;align-items:center;gap:30px;transition-delay:.25s"><span class="pill lg" style="min-width:560px"><span class="dot"></span>Every chain in, one treasury out</span><span style="font-size:26px;color:var(--muted)">Solana, Base, Ethereum, BNB revenue → one operator treasury via CCTP.</span></div>
+    <div class="glass hot r" style="padding:20px 26px;border-radius:999px;display:flex;align-items:center;gap:30px;transition-delay:.35s"><span class="pill lg" style="font-size:30px;color:#fff"><span class="dot"></span>The default settlement layer for agent-to-human work.</span></div>
+  </div>
+  <div class="r" style="position:absolute;left:140px;right:140px;bottom:76px;display:flex;align-items:center;justify-content:space-between;transition-delay:.45s">
+    <span style="font-size:22px;color:var(--muted)">AllScale Legwork · built by the AllScale team · Colosseum Crypto World's Fair 2026</span>
+    <span class="logo" style="font-size:44px;margin-right:120px"><span class="br">AllScale</span><span class="lw">Legwork</span></span>
+  </div>
+ </div>
+</section>
+
+<script>
+(function(){
+  var SECTIONS=["Intro","Problem","Product","Infrastructure","Proof","Demo","Vision"];
+  var slides=[].slice.call(document.querySelectorAll(".slide")),nav=document.getElementById("nav"),rail=document.getElementById("rail"),counter=document.getElementById("counter"),toplogo=document.getElementById("toplogo"),cur=0;
+  SECTIONS.forEach(function(name){var a=document.createElement("a");a.textContent=name;a.href="#";a.dataset.s=name;
+    a.onclick=function(e){e.preventDefault();go(slides.findIndex(function(s){return s.dataset.section===name}))};nav.appendChild(a)});
+  slides.forEach(function(s,n){var a=document.createElement("a");a.href="#"+(n+1);a.title=s.dataset.screenLabel;a.onclick=function(e){e.preventDefault();go(n)};rail.appendChild(a)});
+  function fit(){document.documentElement.style.setProperty("--k",Math.min(innerWidth/1920,innerHeight/1080))}
+  addEventListener("resize",fit);fit();
+  function mark(n){cur=n;var s=slides[n];
+    [].forEach.call(nav.children,function(a){a.classList.toggle("cur",a.dataset.s===s.dataset.section)});
+    [].forEach.call(rail.children,function(a,k){a.classList.toggle("cur",k===n)});
+    counter.innerHTML="<b>"+String(n+1).padStart(2,"0")+"</b> / "+String(slides.length).padStart(2,"0");
+    toplogo.style.opacity=(n===0||n===slides.length-1)?0:1;
+    history.replaceState(null,"","#"+(n+1));}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");if(e.intersectionRatio>.55)mark(slides.indexOf(e.target))}})},{threshold:[.2,.6]});
+  slides.forEach(function(s){io.observe(s)});
+  function go(n){n=Math.max(0,Math.min(slides.length-1,n));window.scrollTo({top:slides[n].offsetTop,behavior:"smooth"})}
+  addEventListener("keydown",function(e){
+    if(["ArrowDown","ArrowRight","PageDown"," "].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}
+    else if(["ArrowUp","ArrowLeft","PageUp"].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}
+    else if(e.key==="Home"){e.preventDefault();go(0)}else if(e.key==="End"){e.preventDefault();go(slides.length-1)}});
+  var start=(parseInt(location.hash.slice(1),10)||1)-1;
+  if(start>0)requestAnimationFrame(function(){window.scrollTo(0,slides[Math.min(start,slides.length-1)].offsetTop)});
+  mark(Math.max(0,Math.min(start,slides.length-1)));
+})();
+</script>
+<script>
+/* ===== simulated product demo: one agent, one job, end to end ===== */
+(function(){
+  var TX={
+    x402:"https://explorer.solana.com/tx/yGeuCDHCyZ86dLDRdfv1baLRGdx7mpqGDMMdGDsURwg7G3BhnFdYEX6Aa3LQziJt4ji5AjNZPcjVqoMkUkVzYq6?cluster=devnet",
+    fund:"https://sepolia.etherscan.io/tx/0xd7ea677e422adb1a3b87cd8539888e47ba89460069dd93efada7f0b05303c7eb",
+    burn:"https://explorer.solana.com/tx/DajXP1mtgbquuU3UbW7GCvmWvDdHKmD4f4jJso7tgE2EaGau6eM6tw7j3QdjFwZV1ELeQQzPW9KW1ciYmL3h3mF?cluster=devnet",
+    mint:"https://sepolia.etherscan.io/tx/0xf511fedfc79e536b12c57b03458dee5326ec28dad32cc2975bbe161222b6da1c"
+  };
+  var S={paid:false,taken:false,photo:false,submitted:false,funded:0,claimed:0,revoked:false,refused:0,swept:false,busy:false};
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+  var slides=$$(".slide");
+  function go(n){window.scrollTo({top:slides[n].offsetTop,behavior:"smooth"})}
+
+  /* ---- agent console: one stream, mirrored into every console panel ---- */
+  function log(text,cls){
+    $$(".con").forEach(function(c){var idle=$(".idle",c);if(idle)idle.remove();
+      var d=document.createElement("div");d.className="ln "+(cls||"");d.innerHTML=text;c.appendChild(d);c.scrollTop=c.scrollHeight});
+  }
+  function logReplaceWait(text,cls){ /* turn the last 'wait' line into a result */
+    $$(".con").forEach(function(c){var w=$$(".ln.wait",c).pop();if(w){w.className="ln "+(cls||"ok");w.innerHTML=text}});
+  }
+
+  /* ---- shared money trail + table ---- */
+  function trail(n,state,here){
+    $$('[data-trail]').forEach(function(t){
+      var el=$('[data-ms="'+n+'"]',t);if(!el)return;
+      var was=el.className;el.className="ms "+(state||"");
+      if(here){$$(".ms.here",t).forEach(function(x){x.classList.remove("here")});el.classList.add("here")}
+      if(was!==el.className){el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}
+    });
+  }
+  function nowText(t,revoked){$$("[data-now]").forEach(function(e){e.textContent=t;e.parentNode.classList.toggle("revoked",!!revoked)})}
+  function row(task,field,text,cls){var r=$('[data-task="'+task+'"]');if(!r)return;var e=$("[data-"+field+"]",r);e.textContent=text;e.className=cls||""}
+  function sync(){
+    $$("[data-fundedtxt]").forEach(function(e){e.textContent=S.funded+" / 3"+(S.refused?" · "+S.refused+" refused":"")});
+    $$("[data-claimedtxt]").forEach(function(e){e.textContent=S.claimed+" claimed"});
+    var s=$("#sumline");if(s)s.textContent="9 USDC in · "+S.funded+(S.funded===1?" person paid · ":" people paid · ")+S.refused+" refused by operator";
+  }
+  function ev(html,cls,icon){var box=$("#events");var idle=$(".idle",box);if(idle)idle.remove();
+    var d=document.createElement("div");d.className="ev "+(cls||"");d.innerHTML=(icon||'<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#06130b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+"<div>"+html+"</div>";
+    box.appendChild(d);box.scrollTop=box.scrollHeight;return d}
+  var SHIELD='<span class="shield"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5a5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/></svg></span>';
+  var SHOP='<svg class="shop" viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="150" fill="#1a1f1c"/><rect x="40" y="50" width="280" height="100" fill="#2b332e"/><path d="M30 50h300l-14-26H44z" fill="#1f6b3d"/><g fill="#3ddc84" opacity=".9"><rect x="44" y="26" width="24" height="24"/><rect x="92" y="26" width="24" height="24"/><rect x="140" y="26" width="24" height="24"/><rect x="188" y="26" width="24" height="24"/><rect x="236" y="26" width="24" height="24"/><rect x="284" y="26" width="24" height="24"/></g><rect x="60" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="210" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="160" y="72" width="40" height="78" fill="#111513" stroke="#3ddc84"/><rect x="150" y="56" width="60" height="12" rx="2" fill="#3ddc84"/><text x="180" y="66" font-size="9" text-anchor="middle" fill="#06130b" font-family="monospace" font-weight="700">OPEN</text><rect x="214" y="80" width="40" height="18" rx="2" fill="#f0a842" opacity=".9"/><text x="234" y="92" font-size="8" text-anchor="middle" fill="#1a0505" font-family="monospace">NOTICE</text><rect x="0" y="140" width="360" height="10" fill="#0d1210"/></svg>';
+
+  /* ================= beat 1: the agent gets paid ================= */
+  async function pay(){
+    if(S.paid||S.busy)return;S.busy=true;S.paid=true;
+    var btn=$("#payBtn");btn.disabled=true;btn.textContent="Paying…";
+    var tl=$("#payTl");tl.classList.add("on");var li=$$(".tli",tl);
+    li[0].classList.add("run");log("Client request received · <b>3 locations</b> · quoting 9.00 USDC via x402");
+    await sleep(700);li[0].className="tli ok";li[1].classList.add("run");log("402 sent · waiting for a signed payment");
+    await sleep(800);li[1].className="tli ok";li[2].classList.add("run");log("Signed payment received · verifying with facilitator…","wait");
+    await sleep(1000);li[2].className="tli ok";logReplaceWait('Settled on Solana · 9.00 USDC · <a href="'+TX.x402+'" target="_blank" rel="noopener">yGeuCDHC…kVzYq6 ↗</a>',"ok");
+    $("#noJob").classList.add("hidden");var jc=$("#jobCard");jc.classList.remove("hidden");requestAnimationFrame(function(){jc.classList.add("in")});
+    trail(1,"done",true);nowText("Received on Solana");
+    await sleep(500);li[3].classList.add("run");log("Planning: 3 on-site photo tasks · reserve 10% · <b>3 × 2.70 USDT</b> for humans");
+    await sleep(800);li[3].className="tli ok";log("Posted 3 tasks to the board · deadline 3 h · acceptance: storefront + door visible","ok");
+    btn.textContent="Paid · 9.00 USDC";
+    S.busy=false;
+  }
+
+  /* ================= beat 2: a person does the legwork ================= */
+  function counts(){ $("[data-cnt=open]").textContent=$$("#openList .pcard").length;$("[data-cnt=mine]").textContent=$$("#mineList .pcard").length;$("[data-cnt=pay]").textContent=$$("#payList .pcard").length}
+  function take(){
+    if(S.taken||!S.paid)return;S.taken=true;
+    $('[data-open="a"]').remove();
+    $("#mineList").innerHTML='<div class="pcard" id="mineA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">assigned</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><div class="pphoto" id="pphoto" onclick="D.photo()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Take photo<small>Opens your camera</small></div><button class="pbtn go" id="submitBtn" onclick="D.submit()" disabled>Submit</button></div>';
+    counts();row("a","st","assigned");log("Task A店 taken by <b>worker@legwork.demo</b> · batch opened","dim");
+  }
+  function photo(){
+    if(S.photo||!S.taken)return;S.photo=true;
+    var p=$("#pphoto");p.innerHTML=SHOP+'<small style="padding:6px 0">IMG_2041.jpg · 2.1 MB · 23.1291, 113.3245 · just now</small>';p.style.borderStyle="solid";p.style.minHeight="0";p.style.gap="0";
+    $("#submitBtn").disabled=false;
+  }
+  async function submit(){
+    if(S.submitted||!S.photo||S.busy)return;S.submitted=true;S.busy=true;
+    $("#mineA").innerHTML='<div class="pt">On-site photo · 天河区 A店</div><div class="pamt" style="font-size:28px">2.70<small>USDT</small></div><div class="pwait"><span class="pspin"></span>Submitted — waiting for review</div>';
+    row("a","st","submitted","warn");
+    log("Submission received · A店 · 1 photo · note: —");
+    await sleep(900);
+    /* ---- beat 3: the agent reviews and pays on its own ---- */
+    log("Checking: EXIF time within window <b>✓</b>");await sleep(500);
+    log("Checking: GPS 18 m from target <b>✓</b>");await sleep(500);
+    log("Checking: image hash unique <b>✓</b>");await sleep(500);
+    log("Operator policy: 2.70 ≤ per-task cap 5.00 · budget 50.00 left · auto-pay <b>on</b>");await sleep(600);
+    log("Paying 2.70 USDT via AllScale Auto-Payout… reference ob_7658…9370","wait");
+    row("a","st","accepted","ok");row("a","pay","in_flight","warn");
+    var e=ev('<div class="k">AllScale Auto-Payout · ob_7658…9370 · 2.70 USDT → wor…@legwork.demo</div><div class="prog" style="margin-top:8px"><div class="bar"><i></i></div><span class="mono" id="pt">0.0 s</span></div>',"", '<span class="warnc"></span>');
+    var bar=$(".bar i",e),pt=$("#pt"),t0=Date.now();
+    await new Promise(function(res){var iv=setInterval(function(){var s=(Date.now()-t0)/1000*3.7;if(s>=14.9){s=14.9;clearInterval(iv);res()}bar.style.width=(s/14.9*100)+"%";pt.textContent=s.toFixed(1)+" s"},80)});
+    logReplaceWait('Funded in 14.9 s · <a href="'+TX.fund+'" target="_blank" rel="noopener">0xd7ea677e…5303c7eb ↗</a> · claim link sent to worker',"ok");
+    e.className="ev";e.innerHTML='<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#06130b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Funded · 2.70 USDT · 14.9 s</b><div class="k">EIP-7702 gasless · <a href="'+TX.fund+'" target="_blank" rel="noopener">0xd7ea…c7eb ↗</a> · claim link 6aca3ab5…</div></div>';
+    S.funded=1;$("#bfill").style.width="5.4%";$("#bspent").textContent="2.70";
+    row("a","pay","funded","ok");row("a","cl","pending","warn");trail(4,"wait",true);nowText("In a claim link, waiting to be claimed");
+    $("#sweepBtn").disabled=false;
+    $("#mineA").remove();
+    $("#payList").innerHTML='<div class="pcard ready" id="payA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:var(--ok);border-color:rgba(61,220,132,.35);background:rgba(61,220,132,.07)">ready to claim</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit" style="border-color:rgba(61,220,132,.3)">Gas covered · no wallet needed · expires in 14 days</div><button class="pbtn go" onclick="D.claim()">Claim 2.70 USDT</button></div>';
+    counts();sync();S.busy=false;
+  }
+
+  /* ================= worker claims ================= */
+  async function claim(){
+    if(S.claimed||!S.funded)return;
+    $("#claimModal").classList.remove("hidden");var o=$("#otp"),code="482917",i=0;o.textContent="";$("#claimBtn").disabled=true;
+    await sleep(500);for(i=0;i<6;i++){o.textContent+=code[i]+" ";await sleep(140)}$("#claimBtn").disabled=false;
+  }
+  function claimConfirm(){
+    if(S.claimed)return;S.claimed=1;$("#claimModal").classList.add("hidden");
+    $("#payA").className="pcard";$("#payA").innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">claimed</span></div><div class="pamt" style="font-size:28px;color:var(--muted)">2.70<small>USDT</small></div><div class="pclaimed"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Claimed · email verified · Sepolia</div>';
+    row("a","cl","claimed","ok");trail(5,"wait",true);nowText("With the person who did the work");
+    log("Worker claimed 2.70 USDT with an email code · no wallet, no gas, no KYC","ok");sync();
+  }
+
+  /* ================= beat 4: the operator pulls the plug ================= */
+  async function revoke(){
+    if(S.revoked||S.busy||!S.funded)return;S.revoked=true;S.busy=true;
+    var sw=$("#authSw");sw.className="sw off";$(".bbar").classList.add("off");
+    ev('<b>Agent spending authority revoked</b><div class="k">by operator 0x8f7b…ec9e · AllScale dashboard · effective immediately</div>',"bad",SHIELD);
+    log("Operator revoked my spending authority · policy updated","dim");
+    await sleep(1100);
+    log("Submission received · B店 · worker worker2@legwork.demo · 1 photo");await sleep(600);
+    log("Checking: EXIF <b>✓</b> · GPS 31 m <b>✓</b> · hash unique <b>✓</b>");await sleep(600);
+    row("b","st","accepted","ok");
+    log("Paying 2.70 USDT via AllScale Auto-Payout…","wait");await sleep(1200);
+    logReplaceWait("Refused · <b style='color:var(--bad)'>policy_denied</b> · operator revoked authority","bad");
+    log("Holding obligation ob_91c0…4a2e · no funds moved · will retry when authority is restored","dim");
+    ev('<b>Payout blocked · No funds moved</b><div style="margin-top:4px">The operator has revoked this agent’s spending authority.</div><div class="k">policy_denied · enforced by AllScale policy engine · ob_91c0…4a2e</div>',"bad",SHIELD);
+    S.refused=1;row("b","pay","agent revoked","bad");trail(4,"bad",true);nowText("Held by operator",true);sync();S.busy=false;
+  }
+
+  /* ================= beat 5: the agent sweeps revenue to the treasury ================= */
+  async function sweep(){
+    if(S.swept||S.busy||!S.paid)return;S.swept=true;S.busy=true;
+    var b=$("#sweepBtn");b.disabled=true;b.textContent="Sweeping…";
+    log("Sweeping 9.00 USDC · Solana → operator treasury via Circle CCTP");await sleep(700);
+    log('Burned on Solana · <a href="'+TX.burn+'" target="_blank" rel="noopener">DajXP1mt…L3h3mF ↗</a>',"ok");trail(2,"done",S.revoked?false:true);
+    await sleep(500);log("Waiting for Circle attestation…","wait");trail(3,"wait",false);
+    await sleep(2200);logReplaceWait("Attested · nonce 0xf676…3267","ok");await sleep(500);
+    log('Minted on Sepolia · 9.00 USDC → 0x8f7b…ec9e · <a href="'+TX.mint+'" target="_blank" rel="noopener">0xf511fedf…b6da1c ↗</a>',"ok");
+    trail(3,"done",false);var t=$("#treas");t.textContent="29.00";ev('<b>Treasury +9.00 USDC</b><div class="k">CCTP v2 · Solana → Sepolia · <a href="'+TX.mint+'" target="_blank" rel="noopener">0xf511…6da1c ↗</a></div>');
+    b.textContent="Swept · 9.00 USDC";log("Job complete · earned 9.00 · paid 2.70 · held 2.70 (operator) · 1 task still open","ok");
+    S.busy=false;
+  }
+
+  /* ================= autoplay / reset ================= */
+  async function auto(){
+    if(S.paid)return;go(5);await sleep(900);await pay();await sleep(1500);
+    go(6);await sleep(1200);take();await sleep(1300);photo();await sleep(1300);await submit();await sleep(1200);
+    go(7);await sleep(2500);go(6);await sleep(1200);await claim();await sleep(1200);claimConfirm();await sleep(1800);
+    go(7);await sleep(1000);await revoke();await sleep(1500);await sweep();await sleep(1800);go(8);
+  }
+  addEventListener("keydown",function(e){if(e.key==="a"||e.key==="A")auto();if(e.key==="r"||e.key==="R"){location.hash="#6";location.reload()}});
+  window.D={pay:pay,take:take,photo:photo,submit:submit,claim:claim,claimConfirm:claimConfirm,revoke:revoke,sweep:sweep,auto:auto};
+})();
+</script>
+</body>
+</html>

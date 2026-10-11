@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AllScale Legwork — Task board</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c0b;--ink:#ffffff;--muted:#b9c1bc;--line:#2a2f2c;--ok:#3ddc84;--warn:#f0a842;--bad:#ff5a5a;--accent:#3ddc84;--deep:#1f6b3d;
+--sans:"Archivo","Avenir Next","Helvetica Neue",system-ui,sans-serif;--mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:15px;
+background:radial-gradient(ellipse 90% 30% at 80% 0%,rgba(31,107,61,.5),transparent 70%),radial-gradient(1.2px 1.2px at 23px 41px,rgba(255,255,255,.5),transparent 2px),radial-gradient(1px 1px at 151px 97px,rgba(255,255,255,.3),transparent 2px),radial-gradient(1.3px 1.3px at 211px 260px,rgba(255,255,255,.4),transparent 2px),var(--bg);
+background-size:auto,233px 233px,317px 317px,419px 419px}
+a{color:var(--ok);text-decoration:none}a:hover{color:#7cf0ae}
+.shell{max-width:390px;margin:0 auto;padding:54px 16px 48px}
+header{display:flex;align-items:center;gap:10px}
+.logo{display:inline-flex;align-items:center;gap:.42em;font-size:18px;letter-spacing:-.02em;white-space:nowrap;color:#fff}
+.logo .br{position:relative;font-weight:700;padding:.16em .3em}
+.logo .br::before,.logo .br::after{content:"";position:absolute;width:.38em;height:.38em;border:0 solid var(--ok)}
+.logo .br::before{top:0;left:0;border-top-width:.1em;border-left-width:.1em}
+.logo .br::after{bottom:0;right:0;border-bottom-width:.1em;border-right-width:.1em}
+.logo .lw{font-weight:400;color:#e8ece9}
+.me{font:500 12px var(--mono);color:var(--muted);margin:14px 0 0;display:flex;align-items:center;gap:8px}
+.me::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border-radius:999px;font:500 12px/1.4 var(--mono);white-space:nowrap;color:#d6ddd9;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.tag.ok{color:var(--ok);border-color:rgba(61,220,132,.35);background:rgba(61,220,132,.07)}
+.tag.warn{color:var(--warn);border-color:rgba(240,168,66,.35);background:rgba(240,168,66,.07)}
+.tag.bad{color:var(--bad);border-color:rgba(255,90,90,.4);background:rgba(255,90,90,.08)}
+.tag .d{width:6px;height:6px;border-radius:50%;background:currentColor}
+h2{font-size:13px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:36px 4px 12px;display:flex;justify-content:space-between}
+h2 span{color:#5d6661}
+.card{position:relative;border-radius:22px;padding:20px;border:1px solid transparent;background:linear-gradient(180deg,rgba(26,32,29,.8),rgba(11,14,12,.84)) padding-box,linear-gradient(170deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 35%,rgba(255,255,255,.02) 65%,rgba(61,220,132,.24)) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 50px rgba(61,220,132,.035),0 24px 60px rgba(0,0,0,.3);margin-bottom:12px}
+.card.ready{border-color:rgba(61,220,132,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 40px rgba(31,107,61,.35)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.title{font-size:16px;font-weight:500;line-height:1.3;letter-spacing:-.01em;text-wrap:balance}
+.amt{font:600 44px/1 var(--mono);letter-spacing:-.04em;margin:16px 0 4px}
+.amt small{font-size:20px;color:var(--muted);font-weight:500;letter-spacing:0;margin-left:6px}
+.amt.sm{font-size:36px}
+.meta{display:flex;gap:14px;font:500 12px var(--mono);color:var(--muted);margin-top:8px}
+.meta .warnc{color:var(--warn)}
+.crit{margin:14px 0 0;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:13px;line-height:1.5;color:var(--muted)}
+.crit b{display:block;font:600 11px var(--mono);letter-spacing:.12em;color:#7d8781;margin-bottom:4px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border-radius:999px;border:0;font:600 16px var(--sans);letter-spacing:-.01em;cursor:pointer;margin-top:16px;text-decoration:none}
+.btn.go{background:var(--ok);color:#06130b;box-shadow:0 0 30px rgba(61,220,132,.35)}
+.btn.go:hover{background:#5ae79a;color:#06130b}
+.btn.go:active{background:#2fc070}
+.btn.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid var(--line)}
+.btn.glass:hover{background:rgba(255,255,255,.09);color:#fff}
+.photo{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:120px;border-radius:18px;border:1.5px dashed rgba(61,220,132,.5);background:rgba(61,220,132,.05);color:#fff;font-weight:600;font-size:17px;cursor:pointer;margin-top:16px}
+.photo:hover{background:rgba(61,220,132,.09)}
+.photo small{font:500 12px var(--mono);color:var(--muted)}
+.photo input{position:absolute;width:1px;height:1px;opacity:0}
+.field{width:100%;min-height:48px;margin-top:10px;padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);color:#fff;font:500 15px var(--sans);outline:none}
+.field:hover{background:rgba(255,255,255,.06)}
+.field:focus{border-color:var(--ok);background:rgba(61,220,132,.05)}
+.field::placeholder{color:#6b746f}
+textarea.field{resize:vertical;min-height:72px}
+.waiting{display:flex;align-items:center;gap:12px;margin-top:16px;padding:14px 16px;border-radius:14px;border:1.5px dashed rgba(240,168,66,.5);color:var(--warn);font-weight:500}
+.spin{width:16px;height:16px;flex:none;border-radius:50%;border:2px solid rgba(240,168,66,.25);border-top-color:var(--warn);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.claimed{display:flex;align-items:center;gap:10px;margin-top:16px;min-height:48px;padding:0 16px;border-radius:999px;border:1px solid rgba(61,220,132,.35);font:500 13px var(--mono);color:var(--ok)}
+.foot{margin-top:28px;text-align:center;font-size:12px;color:#6b746f}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <a href="/" class="logo"><span class="br">AllScale</span><span class="lw">Legwork</span></a>
+    <span class="tag warn" style="margin-left:auto"><span class="d"></span><!-- copy -->TESTNET<!-- /copy --></span>
+  </header>
+  <div class="me">demo@example.com</div>
+
+  <h2><!-- copy -->Your payments<!-- /copy --><span>2</span></h2>
+  <div class="card ready">
+    <div class="row"><div class="title"><!-- copy -->Photograph the storefront<!-- /copy --></div><span class="tag ok"><span class="d"></span><!-- copy -->ready to claim<!-- /copy --></span></div>
+    <div class="amt">2.7<small>USDT</small></div>
+    <div class="meta"><span><!-- copy -->Gas covered · no wallet needed<!-- /copy --></span></div>
+    <a class="btn go" href="#"><!-- copy -->Claim 2.7 USDT<!-- /copy --></a>
+  </div>
+  <div class="card">
+    <div class="row"><div class="title"><!-- copy -->Check the shelf facing<!-- /copy --></div><span class="tag"><!-- copy -->claimed<!-- /copy --></span></div>
+    <div class="amt sm" style="color:var(--muted)">2.7<small>USDT</small></div>
+    <div class="claimed"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><!-- copy -->Claimed<!-- /copy --> · 0x91c0…4a2e</div>
+  </div>
+
+  <h2><!-- copy -->Your tasks<!-- /copy --><span>2</span></h2>
+  <div class="card">
+    <div class="row"><div class="title"><!-- copy -->Verify the delivery address<!-- /copy --></div><span class="tag"><!-- copy -->assigned<!-- /copy --></span></div>
+    <div class="amt">2.7<small>USDT</small></div>
+    <div class="meta"><span class="warnc" data-deadline="6120">1h 42m</span><span><!-- copy -->left<!-- /copy --></span></div>
+    <div class="crit"><b><!-- copy -->ACCEPTED IF<!-- /copy --></b><!-- copy -->Photo shows the building number and street sign in one frame. Taken on site, within 200 m.<!-- /copy --></div>
+    <form method="post" enctype="multipart/form-data" action="/work/submit">
+      <label class="photo" style="position:relative">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <!-- copy -->Take photo<!-- /copy -->
+        <small><!-- copy -->Opens your camera<!-- /copy --></small>
+        <input type="file" name="photo" accept="image/*" capture="environment" required>
+      </label>
+      <textarea class="field" name="note" placeholder="Note (optional)"></textarea>
+      <button class="btn go" type="submit"><!-- copy -->Submit<!-- /copy --></button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="row"><div class="title"><!-- copy -->Photograph the side entrance<!-- /copy --></div><span class="tag warn"><!-- copy -->submitted<!-- /copy --></span></div>
+    <div class="amt sm">2.7<small>USDT</small></div>
+    <div class="waiting"><span class="spin"></span><!-- copy -->Submitted — waiting for review<!-- /copy --></div>
+  </div>
+
+  <h2><!-- copy -->Open tasks<!-- /copy --><span>1</span></h2>
+  <div class="card">
+    <div class="title"><!-- copy -->Check the shelf price on aisle 4<!-- /copy --></div>
+    <div class="amt">3.0<small>USDT</small></div>
+    <div class="meta"><span data-deadline="14400">4h 00m</span><span><!-- copy -->to finish once taken<!-- /copy --></span></div>
+    <div class="crit"><b><!-- copy -->ACCEPTED IF<!-- /copy --></b><!-- copy -->Clear photo of the price tag and product label together. No flash glare.<!-- /copy --></div>
+    <form method="post" action="/work/take">
+      <input class="field" type="email" name="email" value="demo@example.com" placeholder="Your email" required>
+      <button class="btn glass" type="submit" style="border-color:rgba(61,220,132,.45)"><!-- copy -->Take this task<!-- /copy --></button>
+    </form>
+  </div>
+
+  <div class="foot"><!-- copy -->Paid via AllScale claim link · Powered by AllScale<!-- /copy --></div>
+</div>
+<script>
+(function(){var els=[].slice.call(document.querySelectorAll("[data-deadline]")),t0=Date.now();
+function tick(){els.forEach(function(e){var s=Math.max(0,+e.dataset.deadline-Math.floor((Date.now()-t0)/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;
+e.textContent=h?h+"h "+String(m).padStart(2,"0")+"m":m+"m "+String(sec).padStart(2,"0")+"s"})}
+tick();setInterval(tick,1000)})();
+</script>
+</body>
+</html>
