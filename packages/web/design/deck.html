@@ -4,23 +4,21 @@
 <meta charset="utf-8">
 <title>AllScale Legwork — Pitch</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0c0b;--ink:#fff;--muted:#b9c1bc;--line:#2a2f2c;--ok:#3ddc84;--deep:#1f6b3d;--warn:#f0a842;--bad:#ff5a5a;--accent:#3ddc84;--k:1;
---sans:"Archivo","Avenir Next","Helvetica Neue",system-ui,sans-serif;--mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.23,1,.32,1)}
+:root{--bg:#000;--ink:#fff;--muted:#b9c1bc;--line:#2a2f2c;--ok:#17d46a;--deep:#1f7a45;--warn:#f0a842;--bad:#ff5a5a;--accent:#17d46a;--k:1;
+--sans:"Noto Sans","Noto Sans SC",system-ui,-apple-system,"PingFang SC",sans-serif;--mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.23,1,.32,1)}
 *{box-sizing:border-box}
 html{scroll-snap-type:y mandatory;background:var(--bg);scrollbar-width:none}
 html::-webkit-scrollbar{display:none}
 body{margin:0;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;background:var(--bg)}
-a{color:var(--ok);text-decoration:none}a:hover{color:#8ff3bb}
+a{color:var(--ok);text-decoration:none}a:hover{color:#3be283}
 /* slides */
-.slide{position:relative;height:100vh;height:100svh;scroll-snap-align:start;overflow:hidden;background-color:var(--bg);
-background-image:radial-gradient(1.2px 1.2px at 23px 41px,rgba(255,255,255,.55),transparent 2px),radial-gradient(1px 1px at 151px 97px,rgba(255,255,255,.32),transparent 2px),radial-gradient(1px 1px at 88px 173px,rgba(255,255,255,.22),transparent 2px),radial-gradient(1.4px 1.4px at 211px 260px,rgba(255,255,255,.42),transparent 2px),radial-gradient(1px 1px at 330px 60px,rgba(255,255,255,.28),transparent 2px);
-background-size:233px 233px,317px 317px,191px 191px,419px 419px,373px 373px}
-.slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.slide{position:relative;height:100vh;height:100svh;scroll-snap-align:start;overflow:hidden;background-color:var(--bg);background-image:radial-gradient(ellipse 70% 45% at 50% 118%,rgba(255,255,255,.09),transparent 70%)}
+.slide::after{display:none;content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 .slide+.slide{border-top:1px solid rgba(255,255,255,.03)}
 .canvas{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--k))}
-.glow{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(31,107,61,.6) 0%,rgba(31,107,61,.2) 38%,transparent 68%)}
+.glow{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(31,122,69,.6) 0%,rgba(31,122,69,.2) 38%,transparent 68%)}
 /* reveal */
 .r{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
 .slide.in .r{opacity:1;transform:none}
@@ -29,7 +27,7 @@ background-size:233px 233px,317px 317px,191px 191px,419px 419px,373px 373px}
 .chrome>*{pointer-events:auto}
 .topnav{top:0;left:50%;transform:translateX(-50%) scale(var(--k));transform-origin:top center;padding-top:32px}
 .nav{display:flex;gap:2px;padding:6px;border-radius:999px;background:rgba(14,18,16,.66);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
-border:1px solid transparent;background:linear-gradient(rgba(14,18,16,.7),rgba(14,18,16,.7)) padding-box,linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 50%,rgba(61,220,132,.22)) border-box;box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 24px rgba(61,220,132,.05)}
+border:1px solid transparent;background:linear-gradient(rgba(14,18,16,.7),rgba(14,18,16,.7)) padding-box,linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 50%,rgba(23,212,106,.22)) border-box;box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 24px rgba(23,212,106,.05)}
 .nav a{display:flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;font-size:19px;font-weight:500;color:#7f8a84;letter-spacing:-.01em;transition:color .3s,background .3s}
 .nav a:hover{color:#fff}
 .nav a.cur{color:#fff;background:rgba(255,255,255,.07)}
@@ -38,7 +36,7 @@ border:1px solid transparent;background:linear-gradient(rgba(14,18,16,.7),rgba(1
 .toplogo{top:0;left:0;transform:scale(var(--k));transform-origin:top left;padding:44px 0 0 60px;transition:opacity .4s}
 .rail{right:0;top:50%;transform:translateY(-50%) scale(var(--k));transform-origin:right center;padding-right:44px;display:flex;flex-direction:column;align-items:flex-end;gap:14px}
 .rail a{display:block;width:14px;height:2px;border-radius:2px;background:#3a403c;transition:width .4s var(--ease),background .4s}
-.rail a.cur{width:36px;background:var(--ok);box-shadow:0 0 10px rgba(61,220,132,.6)}
+.rail a.cur{width:36px;background:var(--ok);box-shadow:0 0 10px rgba(23,212,106,.6)}
 .counter{white-space:nowrap;right:0;bottom:0;transform:scale(var(--k));transform-origin:bottom right;padding:0 60px 40px 0;font:500 19px var(--mono);color:#6f7a74;letter-spacing:.06em}
 .counter b{color:#fff;font-weight:500}
 /* logo */
@@ -59,28 +57,28 @@ h1{font-size:100px}h2{font-size:84px}
 .dim{color:#7f8a84}
 /* glass */
 .glass{position:relative;border-radius:30px;border:1px solid transparent;
-background:linear-gradient(180deg,rgba(26,32,29,.78),rgba(11,14,12,.82)) padding-box,linear-gradient(170deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 35%,rgba(255,255,255,.02) 65%,rgba(61,220,132,.25)) border-box;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 60px rgba(61,220,132,.035),0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.glass.hot{background:linear-gradient(180deg,rgba(24,40,31,.82),rgba(11,16,13,.86)) padding-box,linear-gradient(170deg,rgba(61,220,132,.6),rgba(61,220,132,.08) 45%,rgba(61,220,132,.35)) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 80px rgba(31,107,61,.35),0 30px 80px rgba(0,0,0,.4)}
+background:linear-gradient(180deg,rgba(26,32,29,.78),rgba(11,14,12,.82)) padding-box,linear-gradient(170deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 35%,rgba(255,255,255,.02) 65%,rgba(23,212,106,.25)) border-box;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 60px rgba(23,212,106,.035),0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.glass.hot{background:linear-gradient(180deg,rgba(24,40,31,.82),rgba(11,16,13,.86)) padding-box,linear-gradient(170deg,rgba(23,212,106,.6),rgba(23,212,106,.08) 45%,rgba(23,212,106,.35)) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 80px rgba(31,122,69,.35),0 30px 80px rgba(0,0,0,.4)}
 .card{padding:40px}
 .card h3{margin:0 0 18px;font-size:36px;font-weight:500;letter-spacing:-.025em;line-height:1.12;text-wrap:balance}
 .card p{margin:0;font-size:24px;line-height:1.48;color:var(--muted);text-wrap:pretty}
 .idx{font:500 18px var(--mono);letter-spacing:.12em;color:#5f6a64}
 .pill{display:inline-flex;align-items:center;gap:12px;padding:13px 26px;border-radius:999px;font-size:22px;font-weight:500;color:#e6ebe8;white-space:nowrap;border:1px solid transparent;
-background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)) padding-box,linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04)) border-box;box-shadow:inset 0 0 18px rgba(61,220,132,.07);backdrop-filter:blur(10px)}
+background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)) padding-box,linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04)) border-box;box-shadow:inset 0 0 18px rgba(23,212,106,.07);backdrop-filter:blur(10px)}
 .pill.lg{font-size:28px;padding:17px 34px}
 .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);flex:none}
 .pills{display:flex;flex-wrap:wrap;gap:14px}
 .ribbon .flow{animation:flow 1.6s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-32}}
-.check{flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(61,220,132,.3),rgba(61,220,132,.08));border:1.5px solid var(--ok);box-shadow:0 0 30px rgba(61,220,132,.35),0 0 0 8px rgba(10,12,11,1)}
+.check{flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(23,212,106,.3),rgba(23,212,106,.08));border:1.5px solid var(--ok);box-shadow:0 0 30px rgba(23,212,106,.35),0 0 0 8px rgba(10,12,11,1)}
 .frame{display:flex;flex-direction:column;overflow:hidden;border-radius:26px}
 .frame-bar{display:flex;align-items:center;gap:14px;padding:18px 26px;border-bottom:1px solid rgba(255,255,255,.06);font-size:20px;color:var(--muted)}
 .live{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
 .frame iframe{flex:1;border:0;width:100%;background:var(--bg)}
 .step{display:inline-flex;align-items:center;gap:12px;font:500 19px var(--mono);letter-spacing:.14em;color:var(--ok);text-transform:uppercase}
-.step i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;border:1.5px solid var(--ok);color:#fff;letter-spacing:0;box-shadow:0 0 18px rgba(61,220,132,.35)}
+.step i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;border:1.5px solid var(--ok);color:#fff;letter-spacing:0;box-shadow:0 0 18px rgba(23,212,106,.35)}
 .caption{font-size:34px;line-height:1.3;color:#f2f5f3;letter-spacing:-.02em;font-weight:500;text-wrap:pretty}
 
 /* ===== simulated product demo (slides 6–9) ===== */
@@ -91,14 +89,14 @@ background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)) p
 .field{padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);color:#fff;font-size:20px;line-height:1.4}
 .field.big{min-height:96px}
 .dim2{color:#7d8781}
-.quote{display:flex;align-items:center;gap:16px;margin:22px 0;padding:16px 20px;border-radius:16px;border:1px solid rgba(61,220,132,.3);background:rgba(61,220,132,.05);font-size:18px;color:var(--muted)}
+.quote{display:flex;align-items:center;gap:16px;margin:22px 0;padding:16px 20px;border-radius:16px;border:1px solid rgba(23,212,106,.3);background:rgba(23,212,106,.05);font-size:18px;color:var(--muted)}
 .quote b{font-size:30px;color:#fff;font-weight:600;letter-spacing:-.03em}
 .quote .dim2{margin-left:auto}
-button.go{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border:0;border-radius:999px;background:var(--ok);color:#06130b;font:600 20px var(--sans);cursor:pointer;box-shadow:0 0 30px rgba(61,220,132,.35);transition:opacity .3s}
-button.go:hover{background:#5ae79a}
+button.go{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border:0;border-radius:999px;background:var(--ok);color:#03130a;font:600 20px var(--sans);cursor:pointer;box-shadow:0 0 30px rgba(23,212,106,.35);transition:opacity .3s}
+button.go:hover{background:#3be283}
 button.go[disabled]{opacity:.3;cursor:default;box-shadow:none}
 button.go.sm{width:auto;min-height:44px;padding:0 20px;font-size:16px}
-button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(61,220,132,.45)}
+button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(23,212,106,.45)}
 .hint{font-size:19px;color:#6f7a74}.hint b{color:var(--muted);font-weight:600}
 .idle{color:#5d6661;font-size:18px;padding:6px 2px}
 .agentdot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s ease-in-out infinite}
@@ -111,7 +109,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 .tli span{display:block;font-size:14px;color:var(--muted);margin-top:3px;word-break:break-all}
 .tli.run{opacity:1}.tli.run i{border-color:var(--warn);border-top-color:transparent;animation:spin 1s linear infinite}
 .tli.ok{opacity:1}.tli.ok i{border-color:var(--ok);background:var(--ok);animation:none}
-.tli.ok i::after{content:"";width:9px;height:5px;border-left:2.5px solid #06130b;border-bottom:2.5px solid #06130b;transform:rotate(-45deg) translate(1px,-1px)}
+.tli.ok i::after{content:"";width:9px;height:5px;border-left:2.5px solid #03130a;border-bottom:2.5px solid #03130a;transform:rotate(-45deg) translate(1px,-1px)}
 /* agent console */
 .con{flex:1;overflow:auto;padding:22px 26px;font:500 17px/1.55 var(--mono);color:#cfd6d2;display:flex;flex-direction:column;gap:6px}
 .con::-webkit-scrollbar{width:0}
@@ -129,25 +127,25 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 .jobcard.in{opacity:1;transform:none}
 .jh{font-size:15px;color:var(--muted)}.jh b{color:#fff}
 .now{display:flex;align-items:center;gap:12px;margin:16px 0 18px;font-size:20px;font-weight:500}
-.nowk{font:600 11px var(--mono);letter-spacing:.14em;padding:5px 10px;border-radius:999px;color:#06130b;background:var(--ok);box-shadow:0 0 18px rgba(61,220,132,.45)}
+.nowk{font:600 11px var(--mono);letter-spacing:.14em;padding:5px 10px;border-radius:999px;color:#03130a;background:var(--ok);box-shadow:0 0 18px rgba(23,212,106,.45)}
 .now.revoked .nowk{background:var(--bad);color:#1a0505}
 .mtrail{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .ms{position:relative;border:1.5px dashed #343a37;border-radius:14px;padding:12px 10px 10px;font-size:13px;line-height:1.25;color:#8e9892;min-height:78px;transition:all .4s}
 .ms span{display:block;font:600 11px var(--mono);letter-spacing:.1em;color:#5d6661;margin-bottom:6px}
 .ms em{display:block;font-style:normal;font-size:12px;color:#7d8781;margin-top:8px}
 .ms.wait{border-color:var(--warn);color:#e6ebe8}.ms.wait span{color:var(--warn)}
-.ms.done{border-style:solid;border-color:var(--ok);background:rgba(61,220,132,.08);color:#fff}.ms.done span{color:var(--ok)}
+.ms.done{border-style:solid;border-color:var(--ok);background:rgba(23,212,106,.08);color:#fff}.ms.done span{color:var(--ok)}
 .ms.bad{border-style:solid;border-color:var(--bad);background:rgba(255,90,90,.08);color:#fff}.ms.bad span{color:var(--bad)}
-.ms.here::after{content:"MONEY IS HERE";position:absolute;left:50%;top:-11px;transform:translateX(-50%);font:700 9px var(--mono);letter-spacing:.12em;padding:3px 8px;border-radius:999px;background:var(--ok);color:#06130b;white-space:nowrap}
+.ms.here::after{content:"MONEY IS HERE";position:absolute;left:50%;top:-11px;transform:translateX(-50%);font:700 9px var(--mono);letter-spacing:.12em;padding:3px 8px;border-radius:999px;background:var(--ok);color:#03130a;white-space:nowrap}
 .ms.bad.here::after{background:var(--bad);color:#1a0505}
 .ms.flash{animation:msflash 1s var(--ease)}
-@keyframes msflash{0%{box-shadow:0 0 0 0 rgba(61,220,132,.7);background:rgba(61,220,132,.35)}30%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(61,220,132,.25),0 0 50px rgba(61,220,132,.5)}100%{box-shadow:0 0 0 0 transparent}}
+@keyframes msflash{0%{box-shadow:0 0 0 0 rgba(23,212,106,.7);background:rgba(23,212,106,.35)}30%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(23,212,106,.25),0 0 50px rgba(23,212,106,.5)}100%{box-shadow:0 0 0 0 transparent}}
 .mtrail.big{gap:24px}.mtrail.big .ms{min-height:150px;padding:18px 18px;font-size:20px;border-radius:20px}.mtrail.big .ms span{font-size:13px}.mtrail.big .ms em{font-size:15px;margin-top:12px}.mtrail.big .ms.here::after{font-size:11px;top:-13px}
 .mt{width:100%;border-collapse:collapse;margin-top:20px;font-size:15px}
 .mt th{text-align:left;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#7d8781;padding:0 8px 8px;border-bottom:1px solid var(--line)}
 .mt td{padding:10px 8px;border-bottom:1px solid rgba(42,47,44,.6);vertical-align:middle}
 .mt em{display:inline-block;font:500 12px var(--mono);padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:#d6ddd9;font-style:normal;transition:all .3s}
-.mt em.ok{color:var(--ok);border-color:rgba(61,220,132,.4);background:rgba(61,220,132,.07)}
+.mt em.ok{color:var(--ok);border-color:rgba(23,212,106,.4);background:rgba(23,212,106,.07)}
 .mt em.warn{color:var(--warn);border-color:rgba(240,168,66,.4);background:rgba(240,168,66,.07)}
 .mt em.bad{color:var(--bad);border-color:rgba(255,90,90,.4);background:rgba(255,90,90,.08)}
 /* phone */
@@ -161,24 +159,24 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 .ph2{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:26px 2px 10px;display:flex;justify-content:space-between}
 .ph2 span{color:#5d6661}
 .pempty{color:#6b746f;font-size:13px;padding:2px}
-.pcard{border-radius:20px;padding:16px;margin-bottom:10px;border:1px solid transparent;background:linear-gradient(180deg,rgba(26,32,29,.8),rgba(11,14,12,.84)) padding-box,linear-gradient(170deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 35%,rgba(61,220,132,.24)) border-box;animation:lnin .4s var(--ease)}
-.pcard.ready{box-shadow:0 0 36px rgba(31,107,61,.4)}
+.pcard{border-radius:20px;padding:16px;margin-bottom:10px;border:1px solid transparent;background:linear-gradient(180deg,rgba(26,32,29,.8),rgba(11,14,12,.84)) padding-box,linear-gradient(170deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 35%,rgba(23,212,106,.24)) border-box;animation:lnin .4s var(--ease)}
+.pcard.ready{box-shadow:0 0 36px rgba(31,122,69,.4)}
 .pt{font-size:15px;font-weight:500;line-height:1.3}
 .pamt{font:600 36px/1 var(--mono);letter-spacing:-.04em;margin:12px 0 4px}.pamt small{font-size:16px;color:var(--muted);margin-left:5px;letter-spacing:0;font-weight:500}
 .pcrit{margin-top:10px;padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);font:500 11px/1.5 var(--mono);color:var(--muted)}
 .pbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:46px;border-radius:999px;border:0;margin-top:12px;font:600 15px var(--sans);cursor:pointer}
-.pbtn.go{background:var(--ok);color:#06130b;box-shadow:0 0 24px rgba(61,220,132,.35)}
-.pbtn.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(61,220,132,.45)}
+.pbtn.go{background:var(--ok);color:#03130a;box-shadow:0 0 24px rgba(23,212,106,.35)}
+.pbtn.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(23,212,106,.45)}
 .pbtn[disabled]{opacity:.35;cursor:default}
-.pphoto{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:104px;border-radius:16px;border:1.5px dashed rgba(61,220,132,.5);background:rgba(61,220,132,.05);font-weight:600;font-size:15px;cursor:pointer;margin-top:12px;overflow:hidden}
+.pphoto{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:104px;border-radius:16px;border:1.5px dashed rgba(23,212,106,.5);background:rgba(23,212,106,.05);font-weight:600;font-size:15px;cursor:pointer;margin-top:12px;overflow:hidden}
 .pphoto small{font:500 11px var(--mono);color:var(--muted)}
 .pphoto svg.shop{width:100%;height:150px;display:block}
 .pwait{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;border-radius:12px;border:1.5px dashed rgba(240,168,66,.5);color:var(--warn);font-weight:500;font-size:14px}
 .pspin{width:14px;height:14px;border-radius:50%;border:2px solid rgba(240,168,66,.25);border-top-color:var(--warn);animation:spin 1s linear infinite;flex:none}
-.pclaimed{display:flex;align-items:center;gap:8px;margin-top:12px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(61,220,132,.35);font:500 12px var(--mono);color:var(--ok)}
+.pclaimed{display:flex;align-items:center;gap:8px;margin-top:12px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(23,212,106,.35);font:500 12px var(--mono);color:var(--ok)}
 .pfoot{margin-top:24px;text-align:center;font-size:11px;color:#6b746f}
 .pmodal{position:absolute;inset:0;background:rgba(5,7,6,.86);backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:16px;animation:lnin .3s var(--ease)}
-.pmbox{width:100%;border-radius:28px;padding:22px 20px;background:#0f1411;border:1px solid rgba(61,220,132,.3)}
+.pmbox{width:100%;border-radius:28px;padding:22px 20px;background:#0f1411;border:1px solid rgba(23,212,106,.3)}
 .pmlogo{display:flex;justify-content:space-between;align-items:center}
 .pmamt{font-size:40px;font-weight:600;letter-spacing:-.04em;margin-top:18px}.pmamt small{font-size:16px;color:var(--muted)}
 .pmsub{font-size:12px;color:var(--muted);margin-top:4px}
@@ -187,7 +185,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 /* operator policy */
 .budget{margin-top:4px}
 .bbar{height:10px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden}
-.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f6b3d,var(--ok));border-radius:10px;transition:width .8s var(--ease)}
+.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f7a45,var(--ok));border-radius:10px;transition:width .8s var(--ease)}
 .bbar.off i{background:#5d6661}
 .bnums{display:flex;justify-content:space-between;margin-top:8px;font-size:15px;color:var(--muted)}.bnums b{color:#fff;font-weight:500}
 .policy{display:flex;flex-direction:column;gap:10px}
@@ -195,10 +193,10 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 .prow.treas{flex-wrap:wrap}.prow.treas .mono b{font-size:24px;color:#fff;font-weight:500}
 .sw{width:58px;height:32px;border-radius:999px;background:#2a2f2c;position:relative;cursor:pointer;transition:background .3s;flex:none}
 .sw i{position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#8e9892;transition:all .3s}
-.sw.on{background:var(--ok)}.sw.on i{left:30px;background:#06130b}
+.sw.on{background:var(--ok)}.sw.on i{left:30px;background:#03130a}
 .sw.off{background:var(--bad)}.sw.off i{left:4px;background:#1a0505}
 .events{overflow:auto;display:flex;flex-direction:column;gap:10px}
-.ev{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;border:1px solid rgba(61,220,132,.3);background:rgba(61,220,132,.05);animation:lnin .4s var(--ease);font-size:17px}
+.ev{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;border:1px solid rgba(23,212,106,.3);background:rgba(23,212,106,.05);animation:lnin .4s var(--ease);font-size:17px}
 .ev .k{font:500 12px var(--mono);color:var(--muted)}
 .ev.bad{border:1.5px solid var(--bad);background:linear-gradient(180deg,rgba(255,90,90,.12),rgba(255,90,90,.03));box-shadow:0 0 30px rgba(255,90,90,.12)}
 .ev.bad b{display:block;font-size:19px;font-weight:700;color:#fff}
@@ -218,13 +216,13 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="rib" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0" stop-color="#1f6b3d" stop-opacity=".25"/>
-      <stop offset=".3" stop-color="#3ddc84" stop-opacity=".95"/>
+      <stop offset="0" stop-color="#1f7a45" stop-opacity=".25"/>
+      <stop offset=".3" stop-color="#17d46a" stop-opacity=".95"/>
       <stop offset=".65" stop-color="#2fb46b" stop-opacity=".9"/>
-      <stop offset="1" stop-color="#1f6b3d" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#1f7a45" stop-opacity=".3"/>
     </linearGradient>
-    <linearGradient id="ribB" x1="0" x2="1"><stop offset="0" stop-color="#1f6b3d" stop-opacity=".15"/><stop offset=".5" stop-color="#1f6b3d" stop-opacity=".8"/><stop offset="1" stop-color="#1f6b3d" stop-opacity=".15"/></linearGradient>
-    <linearGradient id="ribV" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3ddc84"/><stop offset="1" stop-color="#1f6b3d" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="ribB" x1="0" x2="1"><stop offset="0" stop-color="#1f7a45" stop-opacity=".15"/><stop offset=".5" stop-color="#1f7a45" stop-opacity=".8"/><stop offset="1" stop-color="#1f7a45" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="ribV" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#17d46a"/><stop offset="1" stop-color="#1f7a45" stop-opacity=".2"/></linearGradient>
     <filter id="blur30" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
     <filter id="blur6" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <filter id="coin" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -245,7 +243,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="url(#rib)" stroke-width="54" opacity=".22"/>
     <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="url(#rib)" stroke-width="18" opacity=".7" filter="url(#blur6)"/>
     <path d="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z" fill="none" stroke="#a8f5cb" stroke-width="2" opacity=".9"/>
-    <path class="flow" d="M550 334 C 690 150, 980 150, 984 310 C 980 470, 690 470, 550 286 C 410 150, 120 150, 116 310 C 120 470, 410 470, 550 334" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".6"/>
+    <path class="flow" d="M550 334 C 690 150, 980 150, 984 310 C 980 470, 690 470, 550 286 C 410 150, 120 150, 116 310 C 120 470, 410 470, 550 334" fill="none" stroke="#17d46a" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".6"/>
     <circle r="9" fill="#d9ffe9" filter="url(#coin)"><animateMotion dur="7s" repeatCount="indefinite" path="M550 310 C 700 110, 1010 110, 1010 310 C 1010 510, 700 510, 550 310 C 400 110, 90 110, 90 310 C 90 510, 400 510, 550 310 Z"/></circle>
   </svg>
   <div style="position:absolute;left:140px;top:210px;width:920px">
@@ -275,14 +273,14 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     <div class="glass hot card r" style="padding:36px 44px;display:grid;grid-template-columns:330px 1fr;gap:44px;align-items:start;transition-delay:.35s">
       <div>
         <div class="idx" style="margin-bottom:24px">03</div>
-        <div class="mono g" style="font-size:132px;font-weight:500;line-height:.9;letter-spacing:-.06em;text-shadow:0 0 60px rgba(61,220,132,.35)">1.4B</div>
+        <div class="mono g" style="font-size:132px;font-weight:500;line-height:.9;letter-spacing:-.06em;text-shadow:0 0 60px rgba(23,212,106,.35)">1.4B</div>
         <h3 style="margin-top:28px;font-size:38px;margin-bottom:0">Those people have no wallet.</h3>
       </div>
       <p style="font-size:23px;padding-top:42px">1.4 billion adults are unbanked (World Bank Findex). Remotasks switched off Kenya, Nigeria and Pakistan overnight in 2024 and workers lost their income. Stripe's self-serve cross-border payouts cover only the US, UK, EEA, Canada and Switzerland — so today's "hire-a-human" agents can only pay the rich world.</p>
     </div>
   </div>
   <div class="r" style="position:absolute;left:140px;right:140px;bottom:70px;display:flex;align-items:center;gap:26px;transition-delay:.5s">
-    <svg width="220" height="24" viewBox="0 0 220 24"><path d="M2 12H170" stroke="url(#rib)" stroke-width="3" stroke-linecap="round"/><path d="M180 12H210" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity=".5"/><circle cx="214" cy="12" r="5" fill="none" stroke="#ff5a5a" stroke-width="2"/></svg>
+    <svg width="220" height="24" viewBox="0 0 220 24"><path d="M2 12H170" stroke="url(#rib)" stroke-width="3" stroke-linecap="round"/><path d="M180 12H210" stroke="#17d46a" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity=".5"/><circle cx="214" cy="12" r="5" fill="none" stroke="#ff5a5a" stroke-width="2"/></svg>
     <div class="g" style="font-size:40px;font-weight:500;letter-spacing:-.025em">Agent income has no exit to the people who actually do the legwork.</div>
   </div>
  </div>
@@ -302,17 +300,17 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
       <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="url(#rib)" stroke-width="40" opacity=".25"/>
       <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="url(#rib)" stroke-width="12" opacity=".7" filter="url(#blur6)"/>
       <path d="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190" fill="none" stroke="#a8f5cb" stroke-width="2"/>
-      <path class="flow" d="M100 214 C 260 104, 420 324, 615 214 S 970 104, 1130 214" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".7"/>
+      <path class="flow" d="M100 214 C 260 104, 420 324, 615 214 S 970 104, 1130 214" fill="none" stroke="#17d46a" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".7"/>
       <circle r="9" fill="#d9ffe9" filter="url(#coin)"><animateMotion dur="4.5s" repeatCount="indefinite" path="M100 190 C 260 80, 420 300, 615 190 S 970 80, 1130 190"/></circle>
     </svg>
     <div class="glass" style="position:absolute;left:0;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg>
       <div style="font-size:32px;font-weight:500">Client</div></div>
     <div class="glass hot" style="position:absolute;left:515px;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 16h5"/></svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 16h5"/></svg>
       <div style="font-size:32px;font-weight:500">Agent</div></div>
     <div class="glass" style="position:absolute;left:1030px;top:90px;width:200px;height:200px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>
       <div style="font-size:22px;font-weight:500;line-height:1.15;padding:0 22px">Any person with an email</div></div>
     <span class="pill" style="position:absolute;left:190px;top:0;font-size:21px"><span class="mono g">x402</span> · USDC on Solana <span class="g">→</span></span>
     <span class="pill" style="position:absolute;left:735px;top:0;font-size:21px">AllScale Claim Link <span class="g">→</span></span>
@@ -321,7 +319,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     </div>
   </div>
   <div class="glass card r" style="position:absolute;left:1430px;top:420px;width:350px;padding:36px;transition-delay:.35s">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="mono g" style="font-size:18px;letter-spacing:.14em;font-weight:600">OPERATOR CONTROL</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="mono g" style="font-size:18px;letter-spacing:.14em;font-weight:600">OPERATOR CONTROL</span></div>
     <p style="font-size:24px;color:#e6ebe8;margin:0;line-height:1.5">The operator sets the budget. The operator can revoke the agent's spending authority at any time. <span class="g">The agent never holds a key.</span></p>
   </div>
   <div class="glass r" style="position:absolute;left:140px;right:140px;bottom:76px;padding:22px 30px;border-radius:999px;display:flex;align-items:center;gap:22px;transition-delay:.45s">
@@ -364,19 +362,19 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     <svg width="6" height="430" style="position:absolute;left:25px;top:40px" class="r"><rect width="3" height="430" x="1.5" rx="1.5" fill="url(#ribV)"/></svg>
     <div style="display:flex;flex-direction:column;gap:16px">
       <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.15s">
-        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#17d46a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div class="glass" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Agent paid via x402</span><a href="#" class="mono" style="font-size:24px">yGeuCDHCyZ86…kUkVzYq6 ↗</a><span class="pill" style="font-size:20px">Solana devnet</span></div>
       </div>
       <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.25s">
-        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#17d46a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div class="glass" style="padding:20px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Revenue swept via CCTP</span><span class="mono" style="font-size:22px;color:var(--muted);line-height:1.6">burn <a href="#">DajXP1mtgbqu…mL3h3mF ↗</a><br>mint <a href="#">0xf511fedfc79e…222b6da1c ↗</a></span><span class="pill" style="font-size:20px">Solana → Sepolia</span></div>
       </div>
       <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.35s">
-        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#17d46a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div class="glass hot" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Worker paid via AllScale claim link</span><a href="#" class="mono" style="font-size:24px">0xd7ea677e422a…5303c7eb ↗</a><span class="pill" style="font-size:20px">Sepolia · <span class="mono g" style="font-size:24px">14.9 s</span></span></div>
       </div>
       <div class="r" style="display:grid;grid-template-columns:56px 1fr;gap:30px;align-items:center;transition-delay:.45s">
-        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <div class="glass" style="padding:24px 32px;border-radius:22px;display:grid;grid-template-columns:480px 1fr auto;align-items:center;gap:28px"><span style="font-size:30px;font-weight:500">Operator revoked the agent</span><span style="font-size:24px;color:var(--muted)">payout refused with <span class="mono" style="color:var(--bad)">policy_denied</span></span><span class="pill" style="font-size:20px">AllScale policy engine</span></div>
       </div>
     </div>
@@ -454,7 +452,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     </div>
   </div>
   <!-- phone -->
-  <div class="r" style="position:absolute;left:753px;top:92px;width:414px;height:888px;border-radius:60px;padding:12px;background:linear-gradient(160deg,#3a403c,#121513 30%,#0c0f0d 70%,#2a2f2c);box-shadow:0 0 0 1px #3a403c,0 0 140px rgba(61,220,132,.22),0 60px 140px rgba(0,0,0,.75);transition-delay:.12s">
+  <div class="r" style="position:absolute;left:753px;top:92px;width:414px;height:888px;border-radius:60px;padding:12px;background:linear-gradient(160deg,#3a403c,#121513 30%,#0c0f0d 70%,#2a2f2c);box-shadow:0 0 0 1px #3a403c,0 0 140px rgba(23,212,106,.22),0 60px 140px rgba(0,0,0,.75);transition-delay:.12s">
     <div class="phone" id="phone">
       <div class="pnotch"></div>
       <div class="phead"><span class="logo" style="font-size:16px"><span class="br">AllScale</span><span class="lw">Legwork</span></span><span class="tpill">TESTNET</span></div>
@@ -557,7 +555,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
   <svg class="ribbon r" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;inset:0;transition-delay:.3s">
     <path d="M-60 900 C 380 900, 620 700, 980 730 S 1600 920, 1990 820" fill="none" stroke="url(#ribB)" stroke-width="160" filter="url(#blur30)" opacity=".8"/>
     <path d="M-60 900 C 380 900, 620 700, 980 730 S 1600 920, 1990 820" fill="none" stroke="#a8f5cb" stroke-width="2" opacity=".45"/>
-    <path class="flow" d="M-60 926 C 380 926, 620 734, 980 764 S 1600 954, 1990 854" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".45"/>
+    <path class="flow" d="M-60 926 C 380 926, 620 734, 980 764 S 1600 954, 1990 854" fill="none" stroke="#17d46a" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 15" opacity=".45"/>
   </svg>
   <div style="position:absolute;left:140px;top:170px;right:140px">
     <div class="kicker r">Where this goes</div>
@@ -643,10 +641,10 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     var s=$("#sumline");if(s)s.textContent="9 USDC in · "+S.funded+(S.funded===1?" person paid · ":" people paid · ")+S.refused+" refused by operator";
   }
   function ev(html,cls,icon){var box=$("#events");var idle=$(".idle",box);if(idle)idle.remove();
-    var d=document.createElement("div");d.className="ev "+(cls||"");d.innerHTML=(icon||'<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#06130b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+"<div>"+html+"</div>";
+    var d=document.createElement("div");d.className="ev "+(cls||"");d.innerHTML=(icon||'<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#03130a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+"<div>"+html+"</div>";
     box.appendChild(d);box.scrollTop=box.scrollHeight;return d}
   var SHIELD='<span class="shield"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5a5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/></svg></span>';
-  var SHOP='<svg class="shop" viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="150" fill="#1a1f1c"/><rect x="40" y="50" width="280" height="100" fill="#2b332e"/><path d="M30 50h300l-14-26H44z" fill="#1f6b3d"/><g fill="#3ddc84" opacity=".9"><rect x="44" y="26" width="24" height="24"/><rect x="92" y="26" width="24" height="24"/><rect x="140" y="26" width="24" height="24"/><rect x="188" y="26" width="24" height="24"/><rect x="236" y="26" width="24" height="24"/><rect x="284" y="26" width="24" height="24"/></g><rect x="60" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="210" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="160" y="72" width="40" height="78" fill="#111513" stroke="#3ddc84"/><rect x="150" y="56" width="60" height="12" rx="2" fill="#3ddc84"/><text x="180" y="66" font-size="9" text-anchor="middle" fill="#06130b" font-family="monospace" font-weight="700">OPEN</text><rect x="214" y="80" width="40" height="18" rx="2" fill="#f0a842" opacity=".9"/><text x="234" y="92" font-size="8" text-anchor="middle" fill="#1a0505" font-family="monospace">NOTICE</text><rect x="0" y="140" width="360" height="10" fill="#0d1210"/></svg>';
+  var SHOP='<svg class="shop" viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><rect width="360" height="150" fill="#1a1f1c"/><rect x="40" y="50" width="280" height="100" fill="#2b332e"/><path d="M30 50h300l-14-26H44z" fill="#1f7a45"/><g fill="#17d46a" opacity=".9"><rect x="44" y="26" width="24" height="24"/><rect x="92" y="26" width="24" height="24"/><rect x="140" y="26" width="24" height="24"/><rect x="188" y="26" width="24" height="24"/><rect x="236" y="26" width="24" height="24"/><rect x="284" y="26" width="24" height="24"/></g><rect x="60" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="210" y="66" width="90" height="60" fill="#0d1210" stroke="#3a403c"/><rect x="160" y="72" width="40" height="78" fill="#111513" stroke="#17d46a"/><rect x="150" y="56" width="60" height="12" rx="2" fill="#17d46a"/><text x="180" y="66" font-size="9" text-anchor="middle" fill="#03130a" font-family="monospace" font-weight="700">OPEN</text><rect x="214" y="80" width="40" height="18" rx="2" fill="#f0a842" opacity=".9"/><text x="234" y="92" font-size="8" text-anchor="middle" fill="#1a0505" font-family="monospace">NOTICE</text><rect x="0" y="140" width="360" height="10" fill="#0d1210"/></svg>';
 
   /* ================= beat 1: the agent gets paid ================= */
   async function pay(){
@@ -670,7 +668,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
   function take(){
     if(S.taken||!S.paid)return;S.taken=true;
     $('[data-open="a"]').remove();
-    $("#mineList").innerHTML='<div class="pcard" id="mineA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">assigned</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><div class="pphoto" id="pphoto" onclick="D.photo()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Take photo<small>Opens your camera</small></div><button class="pbtn go" id="submitBtn" onclick="D.submit()" disabled>Submit</button></div>';
+    $("#mineList").innerHTML='<div class="pcard" id="mineA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">assigned</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit">ACCEPTED IF · storefront + door visible · taken on site · within 3 h</div><div class="pphoto" id="pphoto" onclick="D.photo()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#17d46a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Take photo<small>Opens your camera</small></div><button class="pbtn go" id="submitBtn" onclick="D.submit()" disabled>Submit</button></div>';
     counts();row("a","st","assigned");log("Task A店 taken by <b>worker@legwork.demo</b> · batch opened","dim");
   }
   function photo(){
@@ -695,12 +693,12 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
     var bar=$(".bar i",e),pt=$("#pt"),t0=Date.now();
     await new Promise(function(res){var iv=setInterval(function(){var s=(Date.now()-t0)/1000*3.7;if(s>=14.9){s=14.9;clearInterval(iv);res()}bar.style.width=(s/14.9*100)+"%";pt.textContent=s.toFixed(1)+" s"},80)});
     logReplaceWait('Funded in 14.9 s · <a href="'+TX.fund+'" target="_blank" rel="noopener">0xd7ea677e…5303c7eb ↗</a> · claim link sent to worker',"ok");
-    e.className="ev";e.innerHTML='<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#06130b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Funded · 2.70 USDT · 14.9 s</b><div class="k">EIP-7702 gasless · <a href="'+TX.fund+'" target="_blank" rel="noopener">0xd7ea…c7eb ↗</a> · claim link 6aca3ab5…</div></div>';
+    e.className="ev";e.innerHTML='<span class="okc"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#03130a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Funded · 2.70 USDT · 14.9 s</b><div class="k">EIP-7702 gasless · <a href="'+TX.fund+'" target="_blank" rel="noopener">0xd7ea…c7eb ↗</a> · claim link 6aca3ab5…</div></div>';
     S.funded=1;$("#bfill").style.width="5.4%";$("#bspent").textContent="2.70";
     row("a","pay","funded","ok");row("a","cl","pending","warn");trail(4,"wait",true);nowText("In a claim link, waiting to be claimed");
     $("#sweepBtn").disabled=false;
     $("#mineA").remove();
-    $("#payList").innerHTML='<div class="pcard ready" id="payA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:var(--ok);border-color:rgba(61,220,132,.35);background:rgba(61,220,132,.07)">ready to claim</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit" style="border-color:rgba(61,220,132,.3)">Gas covered · no wallet needed · expires in 14 days</div><button class="pbtn go" onclick="D.claim()">Claim 2.70 USDT</button></div>';
+    $("#payList").innerHTML='<div class="pcard ready" id="payA"><div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:var(--ok);border-color:rgba(23,212,106,.35);background:rgba(23,212,106,.07)">ready to claim</span></div><div class="pamt">2.70<small>USDT</small></div><div class="pcrit" style="border-color:rgba(23,212,106,.3)">Gas covered · no wallet needed · expires in 14 days</div><button class="pbtn go" onclick="D.claim()">Claim 2.70 USDT</button></div>';
     counts();sync();S.busy=false;
   }
 
@@ -712,7 +710,7 @@ button.glass{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(6
   }
   function claimConfirm(){
     if(S.claimed)return;S.claimed=1;$("#claimModal").classList.add("hidden");
-    $("#payA").className="pcard";$("#payA").innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">claimed</span></div><div class="pamt" style="font-size:28px;color:var(--muted)">2.70<small>USDT</small></div><div class="pclaimed"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Claimed · email verified · Sepolia</div>';
+    $("#payA").className="pcard";$("#payA").innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div class="pt">On-site photo · 天河区 A店</div><span class="tpill" style="color:#d6ddd9;border-color:var(--line);background:none">claimed</span></div><div class="pamt" style="font-size:28px;color:var(--muted)">2.70<small>USDT</small></div><div class="pclaimed"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#17d46a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Claimed · email verified · Sepolia</div>';
     row("a","cl","claimed","ok");trail(5,"wait",true);nowText("With the person who did the work");
     log("Worker claimed 2.70 USDT with an email code · no wallet, no gas, no KYC","ok");sync();
   }

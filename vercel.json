@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci",
+  "buildCommand": "npm run export -w @agent-payroll/web",
+  "outputDirectory": "packages/web/dist",
+  "cleanUrls": true,
+  "trailingSlash": false
+}

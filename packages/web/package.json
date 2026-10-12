@@ -8,7 +8,8 @@
     "dev": "node --import tsx src/server.ts",
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "seed": "node --import tsx src/seed.ts"
+    "seed": "node --import tsx src/seed.ts",
+    "export": "node --import tsx src/export.ts"
   },
   "dependencies": {
     "@agent-payroll/payout-orchestrator": "*",

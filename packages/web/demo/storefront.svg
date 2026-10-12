@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <title>Illustrative storefront photo (demo)</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4a5c"/><stop offset="1" stop-color="#8a97a3"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3540"/><stop offset=".5" stop-color="#46525e"/><stop offset="1" stop-color="#27313b"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <rect x="0" y="40" width="800" height="470" fill="#c9c2b6"/>
+  <g fill="#b3ab9e"><rect x="40" y="70" width="150" height="90"/><rect x="230" y="70" width="150" height="90"/><rect x="420" y="70" width="150" height="90"/><rect x="610" y="70" width="150" height="90"/></g>
+  <rect x="60" y="190" width="680" height="64" rx="4" fill="#1a1a1a"/>
+  <text x="400" y="234" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="34" font-weight="700" fill="#f2efe8" text-anchor="middle">天河区 · B店</text>
+  <path d="M50 254h700l-30 44H80z" fill="#1f7a45"/>
+  <g stroke="#17d46a" stroke-width="3" opacity=".7"><path d="M120 254l-10 44M220 254l-6 44M320 254l-3 44M480 254l3 44M580 254l6 44M680 254l10 44"/></g>
+  <rect x="80" y="298" width="640" height="212" fill="#6f665a"/>
+  <rect x="100" y="318" width="250" height="192" fill="url(#glass)"/>
+  <rect x="450" y="318" width="250" height="192" fill="url(#glass)"/>
+  <rect x="360" y="318" width="80" height="192" fill="#3a3129"/>
+  <rect x="372" y="360" width="56" height="70" fill="#f4f1e8"/>
+  <g fill="#8a8478"><rect x="380" y="372" width="40" height="5"/><rect x="380" y="384" width="34" height="4"/><rect x="380" y="394" width="38" height="4"/><rect x="380" y="404" width="28" height="4"/></g>
+  <text x="400" y="420" font-family="Noto Sans SC, PingFang SC, sans-serif" font-size="10" fill="#b5352d" text-anchor="middle">装修中</text>
+  <circle cx="430" cy="420" r="4" fill="#d8c9a8"/>
+  <rect x="0" y="510" width="800" height="90" fill="#55524d"/>
+  <path d="M0 540h800" stroke="#6a665f" stroke-width="2"/>
+  <g font-family="JetBrains Mono, monospace" font-size="15" fill="#ffffff" opacity=".85">
+    <rect x="16" y="560" width="300" height="28" rx="6" fill="#000" opacity=".45"/>
+    <text x="28" y="579">23.1310°N 113.3241°E · demo</text>
+  </g>
+</svg>
