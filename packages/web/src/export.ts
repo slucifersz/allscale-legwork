@@ -7,7 +7,7 @@ import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "no
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEMO_WORKER, demoLedger } from "./demo-data.js";
-import { cfgFromEnv, deckPage, redactLedger, reviewPage, settlementPage, workPage, type ViewCfg } from "./views.js";
+import { cfgFromEnv, deckPage, jobsPage, overviewPage, payoutsPage, redactLedger, reviewPage, workPage, type ViewCfg } from "./views.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "dist");
@@ -19,7 +19,9 @@ const ledger = demoLedger();
 const cfg: ViewCfg = { ...cfgFromEnv(), payCoin: "USDT", demo: true, reviewHref: "/review", uploadSrc: (f) => `/uploads/${f}` };
 const write = (path: string, html: string) => writeFileSync(join(out, path), html);
 
-write("index.html", settlementPage(ledger, cfg));
+write("index.html", overviewPage(ledger, cfg));
+write("jobs.html", jobsPage(ledger, cfg));
+write("payouts.html", payoutsPage(ledger, cfg));
 write("work.html", workPage(ledger, DEMO_WORKER, cfg));
 write("review.html", reviewPage(ledger, "", cfg));
 write("deck.html", deckPage(readFileSync(join(root, "design", "deck.html"), "utf8"), ledger, cfg, { reviewHref: "/review", demoWorker: DEMO_WORKER }));

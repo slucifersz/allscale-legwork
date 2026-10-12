@@ -5,8 +5,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildFromEnv } from "@agent-payroll/payout-orchestrator/src/config.js";
 import { checkPhoto } from "./checks.js";
-import { esc, page, short } from "./html.js";
-import { cfgFromEnv, deckPage, explain, guardBlock, jobCards, redactLedger, reviewPage, settlementPage, workPage } from "./views.js";
+import { errorPage, esc, short } from "./html.js";
+import { cfgFromEnv, deckPage, explain, guardBlock, jobCards, jobsPage, overviewPage, payoutsPage, redactLedger, reviewPage, workPage } from "./views.js";
 
 const env = (k: string, d?: string) => process.env[k] ?? d ?? "";
 const { orch, store } = buildFromEnv();
@@ -21,12 +21,13 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// ---------- public: verifiable settlement record ----------
-// Shows tx hashes, anonymised task ids and states. Never emails, never claim URLs.
-app.get("/", (req, res) => {
+// ---------- operator console (public read-only views: tx hashes, masked emails, never claim URLs) ----------
+app.get("/", (_req, res) => res.send(overviewPage(store.get(), cfg)));
+app.get("/jobs", (req, res) => {
   if (req.query.partial) return res.send(jobCards(store.get(), cfg));
-  res.send(settlementPage(store.get(), cfg));
+  res.send(jobsPage(store.get(), cfg));
 });
+app.get("/payouts", (_req, res) => res.send(payoutsPage(store.get(), cfg)));
 
 // ---------- workers: task board (mobile) ----------
 app.get("/work", (req, res) => {
@@ -34,14 +35,12 @@ app.get("/work", (req, res) => {
   res.send(workPage(store.get(), me, cfg));
 });
 
-const errorPage = (e: unknown) => page("Error", `<p class="empty">${esc(String(e))}</p><a href="/work">back</a>`, { bodyClass: "work", nav: "none" });
-
 app.post("/work/:id/take", (req, res) => {
   try {
     orch.assign(req.params.id, String(req.body.email));
-    res.redirect("/work?me=" + encodeURIComponent(String(req.body.email)));
+    res.redirect("/work?me=" + encodeURIComponent(String(req.body.email)) + "#mine");
   } catch (e) {
-    res.status(400).send(errorPage(e));
+    res.status(400).send(errorPage(String(e), "/work"));
   }
 });
 
@@ -56,9 +55,9 @@ app.post("/work/:id/submit", upload.single("photo"), async (req, res) => {
     const windowStart = new Date(new Date(t.deadline).getTime() - 6 * 3600_000);
     const check = await checkPhoto(buf, { windowStart, windowEnd: new Date(t.deadline) });
     orch.submit(t.id, String(req.body.batchId), { file: name, note: String(req.body.note ?? ""), check });
-    res.redirect("/work?me=" + encodeURIComponent(t.workerEmail ?? ""));
+    res.redirect("/work?me=" + encodeURIComponent(t.workerEmail ?? "") + "#mine");
   } catch (e) {
-    res.status(400).send(errorPage(e));
+    res.status(400).send(errorPage(String(e), "/work"));
   }
 });
 
@@ -85,7 +84,7 @@ app.post("/review/:id/accept", guard, async (req, res) => {
     return res.json({ ok: false, guardHtml: guardBlock(err, err.retry ? retry : "") });
   } catch (e) {
     if (wantsJson) return res.status(400).json({ ok: false, guardHtml: guardBlock({ msg: String(e), code: "error", retry: false }) });
-    res.status(400).send(page("Error", `<p class="empty">${esc(String(e))}</p>`, { nav: "none" }));
+    res.status(400).send(errorPage(String(e)));
   }
 });
 app.post("/review/:id/flag", guard, (req, res) => {
@@ -109,4 +108,4 @@ app.get("/deck", (_req, res) => {
 // ---------- json for the agent / demo narration ----------
 app.get("/api/ledger", (_req, res) => res.json(redactLedger(store.get())));
 
-app.listen(Number(env("PORT", "4030")), () => console.log(`web on :${env("PORT", "4030")}  /  /work  /deck  /review?token=${OP}`));
+app.listen(Number(env("PORT", "4030")), () => console.log(`web on :${env("PORT", "4030")}  /  /jobs  /payouts  /work  /deck  /review?token=${OP}`));
